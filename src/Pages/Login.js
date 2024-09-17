@@ -38,7 +38,7 @@ function Login() {
               required
               fullWidth
             />
-            <Button variant="contained" color="primary" type="submit" fullWidth>
+            <Button variant="contained" sx={{ backgroundColor: '#ea00d9' }} type="submit" fullWidth>
               Login
             </Button>
           </Box>

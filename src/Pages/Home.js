@@ -1,23 +1,15 @@
 // src/Home.js
 import React from 'react';
-import { Button, Container } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Container } from '@mui/material';
+//import { Link } from 'react-router-dom';
 
 function Home() {
   return (
-    <Container maxWidth="sm" style={{ textAlign: 'center', marginTop: '50px' }}>
+    <Container maxWidth="lg" style={{ textAlign: 'left', marginTop: '50px' }}>
       <h1>Welcome to My Simple Home Page</h1>
-      <p>This is a basic home page built with React.</p>
+      <p>Our mission here at TechTask is to empower students in technology and computer science by connecting them with meaningful volunteer opportunities. We aim to bridge the gap between education and real-world experience, offering a platform for students to apply their skills in service to the community. Through volunteerism, networking, and professional development, we strive to foster growth, collaboration, and innovation, helping students build the foundation for successful careers while making a positive impact.</p>
       
-      {/* Button to Navigate to Login Page */}
-      <Button
-        variant="contained"
-        color="primary"
-        component={Link}
-        to="/login"
-      >
-        Go to Login
-      </Button>
+
     </Container>
   );
 }
