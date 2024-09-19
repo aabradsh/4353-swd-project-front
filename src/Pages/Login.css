@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+
+.login-container {
+    padding: 2rem;
+    margin-top: 175px;
+
+}
+
+.login-paper {
+    padding: 2rem;
+    background-color: #ffffff; /* Customize the background color as needed */
+}
+
+.login-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-family: "Orbitron", system-ui;
+}
+
+.login-input {
+    margin-top: 5px;
+    margin-bottom: 5px; /* Adjust spacing between fields */
+}
+
+.login-button {
+    background-color: #ea00d9; /* Your custom color */
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #d800b2; /* Slightly darker shade on hover */
+    }
+
+    font-family: "Orbitron", system-ui;
+    color: white;
+}

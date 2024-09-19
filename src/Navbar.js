@@ -1,15 +1,17 @@
 import React from 'react';
 import { AppBar, Toolbar, Button, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
+import './Navbar.css'; // Import the CSS file
 
 function Navbar() {
   return (
-    <AppBar position="static" sx={{ backgroundColor: '#ea00d9' }}>
+    <AppBar position="fixed" className="navbar">
       <Toolbar>
-        <Container>
-          <Button color="inherit" component={Link} to="/">Home</Button>
-          <Button color="inherit" component={Link} to="/login">Login</Button>
-          <Button color="inherit" component={Link} to="/GetInvolved">Get Involved</Button>
+        <Container className="navbar-container">
+          <Button className="navbar-button" component={Link} to="/">Home</Button>
+          <Button className="navbar-button" component={Link} to="/login">Login</Button>
+          <Button className="navbar-button" component={Link} to="/Register">Register Here</Button>
+          <Button className="navbar-button" component={Link} to="/AdditionalInfo">Additional Info</Button>
         </Container>
       </Toolbar>
     </AppBar>

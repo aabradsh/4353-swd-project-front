@@ -1,0 +1,17 @@
+/* Navbar.css */
+.navbar {
+    background-color: #ea00d9;
+    z-index: 1300; /* Ensure it stays above other elements */
+}
+
+.navbar-button {
+    color: white; /* Inherit color from AppBar */
+    margin-right: 1rem; /* Spacing between buttons */
+    font-family: "Orbitron", system-ui;
+}
+
+.navbar-container {
+    color: inherit; /* Inherit color from AppBar */
+    display: flex;
+    justify-content: flex-start; /* Align buttons to the left */
+}

@@ -1,6 +1,6 @@
-// src/Login.js
 import React, { useState } from 'react';
 import { Container, TextField, Button, Box, Typography, Paper } from '@mui/material';
+import './Login.css'; // Import the CSS file
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -8,16 +8,15 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would handle the login logic, such as sending credentials to an API.
     console.log('Email:', email);
     console.log('Password:', password);
   };
 
   return (
-    <Container maxWidth="sm">
-      <Paper elevation={3} sx={{ p: 4, mt: 8 }}>
-        <Typography variant="h4" align="center" gutterBottom>
-          Login
+    <Container maxWidth="sm" className="login-container">
+      <Paper elevation={3} className="login-paper">
+        <Typography variant="h4" className="login-title">
+          LOGIN
         </Typography>
         <form onSubmit={handleSubmit}>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
@@ -28,6 +27,7 @@ function Login() {
               onChange={(e) => setEmail(e.target.value)}
               required
               fullWidth
+              className="login-input"
             />
             <TextField
               label="Password"
@@ -37,8 +37,9 @@ function Login() {
               onChange={(e) => setPassword(e.target.value)}
               required
               fullWidth
+              className="login-input"
             />
-            <Button variant="contained" sx={{ backgroundColor: '#ea00d9' }} type="submit" fullWidth>
+            <Button className="login-button" type="submit" fullWidth>
               Login
             </Button>
           </Box>
