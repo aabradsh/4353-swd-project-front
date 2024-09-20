@@ -8,13 +8,13 @@
 
 .additional-info-paper {
     padding: 2rem;
-    background-color: #ffffff; /* Customize the background color as needed */
+    background-color: #ffffff; /* background color of form */
 }
 
 .additional-info-title {
     text-align: center;
     margin-bottom: 2rem;
-    font-family: "Orbitron", sans-serif; /* Customize the font if desired */
+    font-family: "Orbitron", sans-serif;
 }
 
 .additional-info-error {
@@ -23,7 +23,7 @@
 
 .additional-info-input {
     margin-top: 5px;
-    margin-bottom: 5px; /* Adjust spacing between fields */
+    margin-bottom: 5px; /* spacing between fields */
 }
 
 .additional-info-textarea {
@@ -51,5 +51,5 @@
 }
 
 .additional-info-submit-button:hover {
-    background-color: #d800b2; /* Slightly darker shade on hover */
+    background-color: #d800b2; /* slightly darker shade on hover */
 }
