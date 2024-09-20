@@ -1,5 +1,5 @@
 .navbar {
-    background-color: #ea00d9;
+    background-color: #ea00d9 !important;
     z-index: 1300; /* ensure it stays above other elements */
 }
 
