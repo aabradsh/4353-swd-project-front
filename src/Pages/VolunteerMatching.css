@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+
+.volunteer-matching-container {
+    padding: 2rem;
+    margin-top: 135px; /* Same margin as register page */
+}
+
+.volunteer-matching-paper {
+    padding: 2rem;
+    background-color: #ffffff; /* Keeping it consistent */
+}
+
+.volunteer-matching-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-family: "Orbitron", sans-serif; /* Consistent font family */
+}
+
+.volunteer-matching-error {
+    margin-bottom: 1rem; /* Same error message styling */
+}
+
+.volunteer-matching-input {
+    margin-top: 5px;
+    margin-bottom: 5px; /* Matching spacing */
+}
+
+.volunteer-matching-button {
+    background-color: #ea00d9; /* Same color and hover effect for the button */
+    transition: background-color 0.3s ease;
+}
+
+.volunteer-matching-button:hover {
+    background-color: #d800b2; /* Slightly darker shade on hover */
+}
