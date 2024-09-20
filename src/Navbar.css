@@ -1,11 +1,10 @@
-/* Navbar.css */
 .navbar {
-    background-color: #ea00d9;
+    background-color: #ea00d9 !important;
     z-index: 1300; /* Ensure it stays above other elements */
 }
 
 .navbar-button {
-    color: white; /* Inherit color from AppBar */
+    color: white !important; /* Inherit color from AppBar */
     margin-right: 1rem; /* Spacing between buttons */
     font-family: "Orbitron", system-ui;
 }
