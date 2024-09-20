@@ -8,29 +8,31 @@
 
 .volunteer-matching-paper {
     padding: 2rem;
-    background-color: #ffffff; /* Keeping it consistent */
+    background-color: #ffffff; 
 }
 
 .volunteer-matching-title {
     text-align: center;
     margin-bottom: 2rem;
-    font-family: "Orbitron", sans-serif; /* Consistent font family */
+    font-family: "Orbitron", sans-serif; 
 }
 
 .volunteer-matching-error {
-    margin-bottom: 1rem; /* Same error message styling */
+    margin-bottom: 1rem; 
 }
 
 .volunteer-matching-input {
     margin-top: 5px;
-    margin-bottom: 5px; /* Matching spacing */
+    margin-bottom: 5px; 
 }
 
 .volunteer-matching-button {
-    background-color: #ea00d9; /* Same color and hover effect for the button */
+    background-color: #ea00d9; 
     transition: background-color 0.3s ease;
+    color: white;
+    font-family: "Orbitron", sans-serif; 
 }
 
 .volunteer-matching-button:hover {
-    background-color: #d800b2; /* Slightly darker shade on hover */
-}
+    background-color: #d800b2; 
+} 

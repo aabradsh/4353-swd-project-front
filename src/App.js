@@ -6,6 +6,7 @@ import Login from './Pages/Login';
 import AdditionalInfo from './Pages/AdditionalInfo';
 import Navbar from './Navbar';
 import Register from './Pages/Register'
+import VolunteerMatching from './Pages/VolunteerMatching'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/AdditionalInfo" element={<AdditionalInfo />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/VolunteerMatching" element={<VolunteerMatching />} />
         </Routes>
       </div>
     </Router>
