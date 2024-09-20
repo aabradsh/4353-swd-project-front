@@ -6,7 +6,7 @@ import Login from './Pages/Login';
 import AdditionalInfo from './Pages/AdditionalInfo';
 import Navbar from './Navbar';
 import Register from './Pages/Register'
-import VolunteerMatching from './Pages/volunteerMatching'
+import VolunteerMatching from './Pages/VolunteerMatching'
 import Notifications from './Pages/Notifications';
 
 function App() {
