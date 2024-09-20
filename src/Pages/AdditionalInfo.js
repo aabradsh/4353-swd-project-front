@@ -6,7 +6,7 @@ import {
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { AddCircle, RemoveCircle } from '@mui/icons-material';
-import './AdditionalInfo.css'; // Import the CSS file
+import './AdditionalInfo.css'; 
 
 const skillsList = ['Coding', 'Design', 'Marketing', 'Writing', 'Management'];
 const statesList = ['AL', 'AK', 'AZ', 'CA', 'NY', 'TX']; 
@@ -21,7 +21,7 @@ function AdditionalInfo() {
     zip: '',
     skills: [],
     preferences: '',
-    availability: [null] // Start with one date picker
+    availability: [null] // start with one date picker
   });
 
   const handleInputChange = (e) => {
@@ -53,7 +53,6 @@ function AdditionalInfo() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add form submission logic here
     console.log(formData);
   };
 

@@ -8,13 +8,13 @@
 
 .register-paper {
     padding: 2rem;
-    background-color: #ffffff; /* Customize the background color as needed */
+    background-color: #ffffff; 
 }
 
 .register-title {
     text-align: center;
     margin-bottom: 2rem;
-    font-family: "Orbitron", sans-serif; /* Customize the font */
+    font-family: "Orbitron", sans-serif;
 }
 
 .register-error {
@@ -23,14 +23,16 @@
 
 .register-input {
     margin-top: 5px;
-    margin-bottom: 5px; /* Adjust spacing between fields */
+    margin-bottom: 5px; /* spacing between fields */
 }
 
 .register-button {
     background-color: #ea00d9;
     transition: background-color 0.3s ease;
+    color: white;
+    font-family: "Orbitron", sans-serif;
 }
 
 .register-button:hover {
-    background-color: #d800b2; /* Slightly darker shade on hover */
+    background-color: #d800b2; /* slightly darker shade on hover */
 }
