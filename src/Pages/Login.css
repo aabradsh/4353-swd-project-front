@@ -9,7 +9,7 @@
 
 .login-paper {
     padding: 2rem;
-    background-color: #ffffff; /* Customize the background color as needed */
+    background-color: #ffffff; /* background color of form */
 }
 
 .login-title {
@@ -20,15 +20,15 @@
 
 .login-input {
     margin-top: 5px;
-    margin-bottom: 5px; /* Adjust spacing between fields */
+    margin-bottom: 5px; /* spacing between fields */
 }
 
 .login-button {
-    background-color: #ea00d9; /* Your custom color */
+    background-color: #ea00d9; 
     transition: background-color 0.3s ease;
 
     &:hover {
-        background-color: #d800b2; /* Slightly darker shade on hover */
+        background-color: #d800b2; /* slightly darker shade on hover */
     }
 
     font-family: "Orbitron", system-ui;

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Container, TextField, Button, Box, Typography, Paper, Alert } from '@mui/material';
-import './Register.css'; // Import the CSS file
+import './Register.css'; 
 
 function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  // const navigate = useNavigate();  // useNavigate to redirect after registration
+  // const navigate = useNavigate();  // useNavigate to redirect after registration I REMOVED THIS
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,8 +19,8 @@ function Register() {
     
     setErrorMessage('');
     
-    // After successful registration, navigate to additional info page
-    // navigate('/additional-info');
+    // after successful registration, navigate to additional info page
+    // navigate('/additional-info'); I REMOVED THIS 
   };
 
   return (

@@ -9,13 +9,21 @@
 
   .MuiTypography-body1 {
     font-family: 'Roboto Mono', monospace !important;
-    font-size: 5rem;
-    padding-top: 50px;
+    font-size: 20px;
+    padding-top: 75px;
+    padding-bottom: 50px;
   }
 
   .MuiTypography-header1 {
     font-family: "Orbitron", sans-serif !important;
     font-size: 80px;
+  }
+
+  .MuiTypography-footer {
+    font-family: 'Roboto Mono', monospace !important;
+    font-size: 10px;
+    padding-top: 50px;
+    padding-bottom: 50px;
   }
 
   .image-box {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, TextField, Button, Box, Typography, Paper } from '@mui/material';
-import './Login.css'; // Import the CSS file
+import './Login.css';
 
 function Login() {
   const [email, setEmail] = useState('');

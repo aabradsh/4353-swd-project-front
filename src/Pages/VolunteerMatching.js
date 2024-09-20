@@ -1,7 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Container, TextField, Button, Box, Typography, Paper, Alert, MenuItem } from '@mui/material';
 import axios from 'axios';
-import './VolunteerMatching.css'; // Import the CSS file
+import './VolunteerMatching.css'; 
+
+// Dummy data for volunteers and events
+const dummyEvents = [
+  { id: 1, name: 'Hackathon', requiredSkills: ['Cybersecurity', 'Event Planning'] },
+  { id: 2, name: 'Workshops', requiredSkills: ['Software Design', 'Teamwork'] },
+  { id: 3, name: 'Career Fair', requiredSkills: ['Computer Engineering', 'Leadership'] }
+];
+
+const dummyVolunteers = [
+  { id: 1, name: 'Jerry Smith', skills: ['Software Design', 'Event Planning'] },
+  { id: 2, name: 'Rick Sanchez', skills: ['Computer Engineering', 'Leadership'] },
+  { id: 3, name: 'Morty Smith', skills: ['Cybersecurity', 'Teamwork'] }
+];
 
 function VolunteerMatching() {
   const [volunteers, setVolunteers] = useState([]);
@@ -10,17 +23,33 @@ function VolunteerMatching() {
   const [matchedEvent, setMatchedEvent] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  // Fetch volunteers and events from the API when the component mounts
   useEffect(() => {
+    // Fetching volunteers
     axios.get('/api/volunteers')
-      .then(response => setVolunteers(response.data))
-      .catch(error => setErrorMessage('Error fetching volunteers'));
+      .then(response => {
+        setVolunteers(response.data);
+        setErrorMessage('');  
+      })
+      .catch(error => {
+        console.error('Error fetching volunteers:', error);
+        setErrorMessage('Error fetching volunteers, using dummy data.');
+        setVolunteers(dummyVolunteers);  // Use dummy data if API call fails
+      });
 
+    // Fetching events
     axios.get('/api/events')
-      .then(response => setEvents(response.data))
-      .catch(error => setErrorMessage('Error fetching events'));
+      .then(response => {
+        setEvents(response.data);
+        setErrorMessage(''); 
+      })
+      .catch(error => {
+        console.error('Error fetching events:', error);
+        setErrorMessage('Error fetching events, using dummy data.');
+        setEvents(dummyEvents);  
+      });
   }, []);
 
+  // Handle volunteer selection from the dropdown
   const handleVolunteerSelect = (e) => {
     const selectedId = e.target.value;
     setSelectedVolunteer(selectedId);
@@ -31,10 +60,11 @@ function VolunteerMatching() {
       setErrorMessage('');
     } else {
       setMatchedEvent('');
-      setErrorMessage('No matching event found for this volunteer');
+      setErrorMessage('No matching event found for this volunteer.');
     }
   };
 
+  // Function to find matching event based on volunteer's skills
   const findMatchingEvent = (volunteerId) => {
     const volunteer = volunteers.find(v => v.id === volunteerId);
     return events.find(event => 

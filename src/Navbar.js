@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppBar, Toolbar, Button, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
-import './Navbar.css'; // Import the CSS file
+import './Navbar.css';
 
 function Navbar() {
   return (
@@ -12,7 +12,8 @@ function Navbar() {
           <Button className="navbar-button" component={Link} to="/login">Login</Button>
           <Button className="navbar-button" component={Link} to="/Register">Register Here</Button>
           <Button className="navbar-button" component={Link} to="/AdditionalInfo">Additional Info</Button>
-          <Button className="navbar-button" component={Link} to="/volunteerMatching"> Volunteer Matching</Button>
+          <Button className="navbar-button" component={Link} to="/volunteerMatching">Volunteer Matching</Button>
+          <Button className="navbar-button" component={Link} to="/Notifications">Notifications</Button>
         </Container>
       </Toolbar>
     </AppBar>
