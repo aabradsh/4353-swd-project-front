@@ -1,55 +1,72 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Paper, Typography, List, ListItem, ListItemText, Divider, Badge } from '@mui/material';
-import './Notifications.css';  // CSS for styling
+import { Container, Paper, Typography} from '@mui/material';
+import './VolunteerHistory.css';  // CSS for styling
 
 function VolunteerHistory() {
-  const [notifications, setNotifications] = useState([]);
+  const [history, setHistory] = useState([]);
 
   // Simulating notification fetch (replace this with actual API call if needed)
   useEffect(() => {
-    const dummyNotifications = [
-      { id: 1, type: 'event', message: 'You have been assigned to the Hackathon.', date: '2024-09-01' },
-      { id: 2, type: 'update', message: 'The Hackathon has been rescheduled.', date: '2024-09-10' },
-      { id: 3, type: 'reminder', message: 'Reminder: Hackathon is tomorrow.', date: '2024-09-20' }
+    const dummyHistory = [
+      { type: 'History', message: 'No History at the Moment', date: '2024-09-20' }
     ];
 
     // You can fetch these from an API in a real-world app
-    setNotifications(dummyNotifications);
+    setHistory(dummyHistory);
   }, []);
 
   return (
-    <Container maxWidth="md" className="notifications-container">
-      <Typography variant="h4" className="notifications-title">
-        Notifications
+    <Container maxWidth="md" className="history-container">
+      <Typography variant="h4" className="history-title">
+        Volunteer History
       </Typography>
 
-      <Paper elevation={3} className="notifications-paper">
-        {notifications.length === 0 ? (
-          <Typography variant="body1">No notifications at the moment.</Typography>
+      <Paper elevation={3} className="history-paper">
+        {history.length === 0 ? (
+          <Typography variant="body1">No history at the moment.</Typography>
         ) : (
-          <List>
-            {notifications.map(notification => (
-              <React.Fragment key={notification.id}>
-                <ListItem alignItems="flex-start">
-                  <Badge
-                    color={
-                      notification.type === 'event'
-                        ? 'primary'
-                        : notification.type === 'update'
-                        ? 'secondary'
-                        : 'warning'
-                    }
-                    badgeContent={notification.type === 'event' ? 'Event' : notification.type === 'update' ? 'Update' : 'Reminder'}
-                  />
-                  <ListItemText
-                    primary={notification.message}
-                    secondary={`Date: ${notification.date}`}
-                  />
-                </ListItem>
-                <Divider />
-              </React.Fragment>
-            ))}
-          </List>
+          <table>
+            <caption>
+                <strong> Event 1 </strong>
+            </caption>
+
+            <tbody>
+                <tr>
+                    <th scope="row"> Event Name: </th>
+                    <td> "Input Event Name" </td>
+                </tr>
+
+                <tr>
+                    <th scope="row"> Event Description: </th>
+                    <td> "Input Event Description" </td>
+                </tr>
+
+                <tr>
+                    <th scope="row"> Location: </th>
+                    <td> "Input Location" </td>
+                </tr>
+
+                <tr>
+                    <th scope="row"> Required Skills: </th>
+                    <td> "Input Required Skills" </td>
+                </tr>
+
+                <tr>
+                    <th scope="row"> Urgency: </th>
+                    <td> "Input Urgency" </td>
+                </tr>
+
+                <tr>
+                    <th scope="row"> Event Date: </th>
+                    <td> "Input Event Date" </td>
+                </tr>
+
+                <tr>
+                    <th scope="row"> Volunteer Status: </th>
+                    <td> "Input Volunteer Participation Status" </td>
+                </tr>
+            </tbody>
+          </table>
         )}
       </Paper>
     </Container>
