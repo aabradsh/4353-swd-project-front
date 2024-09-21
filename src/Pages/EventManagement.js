@@ -1,21 +1,26 @@
+import './EventManagement.css';
 import React, { useState } from 'react';
 import {
-  TextField,
-  Button,
-  MenuItem,
-  Select,
-  InputLabel,
-  FormControl,
-  Checkbox,
-  ListItemText,
-  Input,
-  Grid,
-  Box,
-  Typography,
-  Container,
+  Container, 
+  TextField, 
+  Button, 
+  Box, 
+  Typography, 
+  Paper, 
+  MenuItem, 
+  Select, 
+  InputLabel, 
+  FormControl, 
+  Chip,
+  Checkbox, 
+  ListItemText, 
+  OutlinedInput, 
+  TextareaAutosize, 
+  IconButton
 } from '@mui/material';
-import { LocalizationProvider, DatePicker } from '@mui/lab';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { AddCircle, RemoveCircle } from '@mui/icons-material';
 
 const skillsList = ['Python', 'C++', 'C#', 'C', 'JavaScript', 'HTML', 'IT', 'Computer Repair'];
 const urgencies = ['Low', 'Medium', 'High'];
@@ -46,6 +51,11 @@ function EventManagement() {
     setFormData({ ...formData, requiredSkills: typeof value === 'string' ? value.split(',') : value });
   };
 
+  const removeDatePicker = (index) => {
+    const newDate = formData.eventDate.filter((_, i) => i !== index);
+    setFormData((prevData) => ({ ...prevData, eventDate: newDate }));
+  };
+
   const validate = () => {
     let tempErrors = {};
     tempErrors.eventName = formData.eventName ? '' : 'Event Name is required';
@@ -66,146 +76,110 @@ function EventManagement() {
   };
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <Container maxWidth="md">
-          <Box
-            sx={{
-              backgroundColor: 'white',
-              padding: '30px',
-              borderRadius: '10px',
-              boxShadow: 3,
-            }}
-          >
-            <Typography variant="h4" gutterBottom align="center" sx={{ color: 'black' }}>
-              Event Management Form
-            </Typography>
-            <form onSubmit={handleSubmit}>
-              <Grid container spacing={3}>
-                <Grid item xs={12}>
-                  <TextField
-                    fullWidth
-                    required
-                    label="Event Name"
-                    name="eventName"
-                    value={formData.eventName}
-                    onChange={handleInputChange}
-                    error={Boolean(errors.eventName)}
-                    helperText={errors.eventName}
-                    inputProps={{ maxLength: 100 }}
-                    margin="normal"
-                    sx={{
-                      backgroundColor: 'white',
-                      input: { color: 'black' },
-                    }}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    fullWidth
-                    required
-                    label="Event Description"
-                    name="eventDescription"
-                    multiline
-                    rows={4}
-                    value={formData.eventDescription}
-                    onChange={handleInputChange}
-                    error={Boolean(errors.eventDescription)}
-                    helperText={errors.eventDescription}
-                    margin="normal"
-                    sx={{
-                      backgroundColor: 'white',
-                      input: { color: 'black' },
-                    }}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    fullWidth
-                    required
-                    label="Location"
-                    name="location"
-                    multiline
-                    rows={2}
-                    value={formData.location}
-                    onChange={handleInputChange}
-                    error={Boolean(errors.location)}
-                    helperText={errors.location}
-                    margin="normal"
-                    sx={{
-                      backgroundColor: 'white',
-                      input: { color: 'black' },
-                    }}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <FormControl fullWidth margin="normal" error={Boolean(errors.requiredSkills)}>
-                    <InputLabel sx={{ color: 'black' }}>Required Skills</InputLabel>
-                    <Select
-                      multiple
-                      name="requiredSkills"
-                      value={formData.requiredSkills}
-                      onChange={handleSkillsChange}
-                      input={<Input />}
-                      renderValue={(selected) => selected.join(', ')}
-                      sx={{
-                        backgroundColor: 'white',
-                        color: 'black',
-                      }}
-                    >
-                      {skillsList.map((skill) => (
-                        <MenuItem key={skill} value={skill}>
-                          <Checkbox checked={formData.requiredSkills.indexOf(skill) > -1} />
-                          <ListItemText primary={skill} />
-                        </MenuItem>
-                      ))}
-                    </Select>
-                    {errors.requiredSkills && <Typography color="error">{errors.requiredSkills}</Typography>}
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12}>
-                  <FormControl fullWidth margin="normal" error={Boolean(errors.urgency)}>
-                    <InputLabel sx={{ color: 'black' }}>Urgency</InputLabel>
-                    <Select
-                      label="Urgency"
-                      name="urgency"
-                      value={formData.urgency}
-                      onChange={handleInputChange}
-                      sx={{
-                        backgroundColor: 'white',
-                        color: 'black',
-                      }}
-                    >
-                      {urgencies.map((urgency, index) => (
-                        <MenuItem key={index} value={urgency}>
-                          {urgency}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                    {errors.urgency && <Typography color="error">{errors.urgency}</Typography>}
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12}>
-                  <FormControl fullWidth margin="normal" error={Boolean(errors.eventDate)}>
-                    <DatePicker
-                      label="Event Date"
-                      value={formData.eventDate}
-                      onChange={handleDateChange}
-                      renderInput={(params) => (
-                        <TextField {...params} sx={{ backgroundColor: 'white', input: { color: 'black' } }} />
-                      )}
-                    />
-                    {errors.eventDate && <Typography color="error">{errors.eventDate}</Typography>}
-                  </FormControl>
-                </Grid>
-              </Grid>
-              <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 3 }}>
-                Submit
-              </Button>
-            </form>
+    <Container maxWidth="sm" className="register-container">
+      <Paper elevation={3} className="register-paper">
+        <Typography variant="h4" className="register-title">
+          Event Management
+        </Typography>
+        
+        <form onSubmit={handleSubmit}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+            <TextField
+              fullWidth
+              required
+              label="Event Name:"
+              name="eventName"
+              value={formData.eventTitle}
+              onChange={handleInputChange}
+              inputProps={{ maxLength: 100 }}
+            />
+
+            <TextField
+              fullWidth
+              required
+              label="Event Description:"
+              name="eventDescription"
+              multiline
+              rows={4}
+              value={formData.eventDescription}
+              onChange={handleInputChange}
+            />
+
+            <FormControl fullWidth>
+            <InputLabel id="skills-label">Required Skills</InputLabel>
+            <Select
+              labelId="skills-label"
+              id="skills"
+              multiple
+              required
+              value={formData.requiredSkills}
+              onChange={handleSkillsChange}
+              input={<OutlinedInput label="Required Skills" />}
+              renderValue={(selected) => (
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                  {selected.map((skill) => (
+                    <Chip key={skill} label={skill} />
+                  ))}
+                </Box>
+              )}
+            >
+              {skillsList.map((skill) => (
+                <MenuItem key={skill} value={skill}>
+                  <Checkbox checked={formData.requiredSkills.indexOf(skill) > -1} />
+                  <ListItemText primary={skill} />
+                </MenuItem>
+              ))}
+            </Select>
+
+          </FormControl>
+            <TextField
+              fullWidth
+              required
+              label="Location:"
+              name="location"
+              multiline
+              rows={2}
+              value={formData.location}
+              onChange={handleInputChange}
+            />
+
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DatePicker
+                required
+                label="Event Date"
+                value={formData.eventDate}
+                onChange={handleDateChange}
+                renderInput={(params) => <TextField {...params} fullWidth required />}
+            />
+            </LocalizationProvider>
+
+            <FormControl fullWidth>
+            <InputLabel id="urgency-label">Urgency</InputLabel>
+            <Select
+              fullWidth
+              required
+              labelId="urgency-label"
+              id="urgency"
+              name="urgency"
+              value={formData.urgency}
+              onChange={handleInputChange}
+            >
+              {urgencies.map((urgency) => (
+                <MenuItem key={urgency} value={urgency}>
+                  {urgency}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+            
+            <Button className="submit-button" type="submit" fullWidth>
+              SUBMIT
+            </Button>
           </Box>
-        </Container>
-    </LocalizationProvider>
+        </form>
+      </Paper>
+    </Container>
   );
-};
+}
 
 export default EventManagement;

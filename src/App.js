@@ -8,6 +8,7 @@ import Navbar from './Navbar';
 import Register from './Pages/Register';
 import VolunteerMatching from './Pages/VolunteerMatching';
 import Notifications from './Pages/Notifications';
+import EventManagement from './Pages/EventManagement';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/VolunteerMatching" element={<VolunteerMatching />} />
           <Route path="/Notifications" element={<Notifications />} />
+          <Route path="/EventManagement" element={<EventManagement />} />
         </Routes>
       </div>
     </Router>
