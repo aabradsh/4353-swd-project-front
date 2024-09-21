@@ -15,6 +15,7 @@ function Navbar() {
           <Button className="navbar-button" component={Link} to="/volunteerMatching">Volunteer Matching</Button>
           <Button className="navbar-button" component={Link} to="/Notifications">Notifications</Button>
           <Button className="navbar-button" component={Link} to="/VolunteerHistory">Volunteer History</Button>
+          <Button className="navbar-button" component={Link} to="/EventManagement">Event Management</Button>
         </Container>
       </Toolbar>
     </AppBar>
