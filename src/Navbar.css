@@ -4,13 +4,18 @@
 }
 
 .navbar-button {
-    color: inherit; 
+    color: white !important; 
     margin-right: 1rem; /* spacing between buttons */
-    font-family: "Orbitron", system-ui;
+    font-family: "Orbitron", system-ui !important;
 }
 
 .navbar-container {
     color: inherit;
     display: flex;
-    justify-content: flex-start; /* align buttons to the left */
+    justify-content: flex-end; /* align buttons to the right */
+    width: 100%;
+}
+
+.menu-item {
+    font-family: "Orbitron", system-ui !important;
 }

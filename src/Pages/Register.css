@@ -13,8 +13,8 @@
 
 .register-title {
     text-align: center;
-    margin-bottom: 2rem;
-    font-family: "Orbitron", sans-serif;
+    margin-bottom: 30px !important;
+    font-family: "Orbitron", sans-serif !important;
 }
 
 .register-error {
@@ -27,12 +27,27 @@
 }
 
 .register-button {
-    background-color: #ea00d9;
+    background-color: #ea00d9 !important;
     transition: background-color 0.3s ease;
-    color: white;
-    font-family: "Orbitron", sans-serif;
+    color: white !important;
+    font-family: "Orbitron", sans-serif !important;
 }
 
 .register-button:hover {
     background-color: #d800b2; /* slightly darker shade on hover */
 }
+
+.register-error {
+    margin-bottom: 1rem;
+    font-family: 'Orbitron', sans-serif !important; 
+    font-size: 1.2rem; 
+    font-weight: bold; 
+    background-color: #711c91 !important;
+    color: white !important;
+}
+
+.register-error .MuiAlert-icon {
+    color: white !important; /* Custom color for the icon */
+}
+
+

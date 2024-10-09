@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Container, TextField, Button, Box, Typography, Paper, Alert } from '@mui/material';
+import axios from 'axios';
 import './Register.css'; 
 
 function Register() {
@@ -7,20 +8,34 @@ function Register() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  // const navigate = useNavigate();  // useNavigate to redirect after registration I REMOVED THIS
+  const [successMessage, setSuccessMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (password !== confirmPassword) {
       setErrorMessage('Passwords do not match');
+      setSuccessMessage('');
       return;
     }
     
     setErrorMessage('');
-    
-    // after successful registration, navigate to additional info page
-    // navigate('/additional-info'); I REMOVED THIS 
+
+    try {
+      // make API call to register
+      const response = await axios.post('http://localhost:4000/api/register', { email, password });
+      setSuccessMessage(response.data.message); // Set success message
+      setErrorMessage(''); // Clear error message
+    } catch (error) {
+      if (error.response && error.response.status === 409) {
+        // if user already exists, show the error message
+        setErrorMessage(error.response.data.error);
+      } else {
+        // handle other potential errors
+        setErrorMessage('Something went wrong. Please try again.');
+      }
+      setSuccessMessage(''); // clear success message
+    }
   };
 
   return (
@@ -30,6 +45,7 @@ function Register() {
           REGISTER
         </Typography>
         {errorMessage && <Alert severity="error" className="register-error">{errorMessage}</Alert>}
+        {successMessage && <Alert severity="success" className="register-success">{successMessage}</Alert>}
         <form onSubmit={handleSubmit}>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             <TextField

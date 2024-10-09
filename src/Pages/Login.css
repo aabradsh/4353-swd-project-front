@@ -14,8 +14,8 @@
 
 .login-title {
     text-align: center;
-    margin-bottom: 2rem;
-    font-family: "Orbitron", system-ui;
+    margin-bottom: 30px !important;
+    font-family: "Orbitron", system-ui !important;
 }
 
 .login-input {
@@ -24,13 +24,13 @@
 }
 
 .login-button {
-    background-color: #ea00d9; 
+    background-color: #ea00d9 !important; 
     transition: background-color 0.3s ease;
 
     &:hover {
         background-color: #d800b2; /* slightly darker shade on hover */
     }
 
-    font-family: "Orbitron", system-ui;
-    color: white;
+    font-family: "Orbitron", system-ui !important;
+    color: white !important;
 }

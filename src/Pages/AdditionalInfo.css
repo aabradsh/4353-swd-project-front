@@ -13,8 +13,8 @@
 
 .additional-info-title {
     text-align: center;
-    margin-bottom: 2rem;
-    font-family: "Orbitron", sans-serif;
+    margin-bottom: 30px !important;
+    font-family: "Orbitron", sans-serif !important;
 }
 
 .additional-info-error {
@@ -44,10 +44,10 @@
 }
 
 .additional-info-submit-button {
-    background-color: #ea00d9;
+    background-color: #ea00d9 !important;
     transition: background-color 0.3s ease;
-    font-family: "Orbitron", sans-serif;
-    color: white;
+    font-family: "Orbitron", sans-serif !important;
+    color: white !important;
 }
 
 .additional-info-submit-button:hover {

@@ -1,15 +1,32 @@
 import React, { useState } from 'react';
-import { Container, TextField, Button, Box, Typography, Paper } from '@mui/material';
+import { Container, TextField, Button, Box, Typography, Paper, Alert } from '@mui/material'; // Import Alert here
+import axios from 'axios';
 import './Login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
+    setErrorMessage('');
+    setSuccessMessage('');
+
+    try {
+      const response = await axios.post('http://localhost:5000/login', {
+        email,
+        password,
+      });
+      setSuccessMessage(response.data.message); 
+    } catch (error) {
+      if (error.response) {
+        setErrorMessage(error.response.data.error);
+      } else {
+        setErrorMessage('An error occurred. Please try again.');
+      }
+    }
   };
 
   return (
@@ -18,6 +35,8 @@ function Login() {
         <Typography variant="h4" className="login-title">
           LOGIN
         </Typography>
+        {errorMessage && <Alert severity="error" className="login-error">{errorMessage}</Alert>}
+        {successMessage && <Alert severity="success" className="login-success">{successMessage}</Alert>}
         <form onSubmit={handleSubmit}>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             <TextField
