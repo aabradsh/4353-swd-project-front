@@ -66,6 +66,7 @@ function Notifications() {
                     primary={notification.message}
                     secondary={`Date: ${new Date(notification.createdAt).toLocaleDateString()}`}
                   />
+
                 </ListItem>
                 <Divider />
               </React.Fragment>
