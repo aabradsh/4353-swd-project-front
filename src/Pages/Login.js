@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Container, TextField, Button, Box, Typography, Paper, Alert } from '@mui/material';
 import axios from 'axios';
-import './Login.css';  // Make sure to import your CSS file
+import { useNavigate } from 'react-router-dom'; 
+import './Login.css';  
 
 function Login() {
+  const navigate = useNavigate(); 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -15,21 +17,20 @@ function Login() {
     setSuccessMessage('');
 
     try {
-      // Send login request to the backend
       const response = await axios.post('http://localhost:4000/api/login', { email, password });
-      setSuccessMessage(response.data.message); // Set success message
+      setSuccessMessage(response.data.message);
 
-      // Here you can store the user's information (like token or user data) and redirect them
-      console.log('User logged in:', response.data.user); // Example: you can store this in local storage or state management
+      console.log('User logged in:', response.data.user); 
 
-      // Redirect or perform additional actions as needed
+      // redirect after login
+      navigate('/additional-info');
 
     } catch (error) {
       if (error.response && error.response.status === 401) {
-        // If the error is from the backend (invalid credentials)
         setErrorMessage(error.response.data.error);
-      } else {
-        // Other errors (e.g., network issues)
+      } 
+      
+      else {
         setErrorMessage('Something went wrong. Please try again.');
       }
     }
@@ -44,7 +45,7 @@ function Login() {
         <form onSubmit={handleSubmit}>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             <TextField
-              className="login-input"  // Apply your custom CSS class
+              className="login-input" 
               label="Email"
               variant="outlined"
               value={email}
@@ -53,7 +54,7 @@ function Login() {
               fullWidth
             />
             <TextField
-              className="login-input"  // Apply your custom CSS class
+              className="login-input"  
               label="Password"
               variant="outlined"
               type="password"
@@ -63,7 +64,7 @@ function Login() {
               fullWidth
             />
             <Button 
-              className="login-button"  // Apply your custom CSS class
+              className="login-button"  
               type="submit" 
               fullWidth 
               variant="contained"
