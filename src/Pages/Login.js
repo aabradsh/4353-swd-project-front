@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Container, TextField, Button, Box, Typography, Paper, Alert } from '@mui/material'; // Import Alert here
+import { Container, TextField, Button, Box, Typography, Paper, Alert } from '@mui/material';
 import axios from 'axios';
-import './Login.css';
+import './Login.css';  // Make sure to import your CSS file
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -15,40 +15,45 @@ function Login() {
     setSuccessMessage('');
 
     try {
-      const response = await axios.post('http://localhost:5000/login', {
-        email,
-        password,
-      });
-      setSuccessMessage(response.data.message); 
+      // Send login request to the backend
+      const response = await axios.post('http://localhost:4000/api/login', { email, password });
+      setSuccessMessage(response.data.message); // Set success message
+
+      // Here you can store the user's information (like token or user data) and redirect them
+      console.log('User logged in:', response.data.user); // Example: you can store this in local storage or state management
+
+      // Redirect or perform additional actions as needed
+
     } catch (error) {
-      if (error.response) {
+      if (error.response && error.response.status === 401) {
+        // If the error is from the backend (invalid credentials)
         setErrorMessage(error.response.data.error);
       } else {
-        setErrorMessage('An error occurred. Please try again.');
+        // Other errors (e.g., network issues)
+        setErrorMessage('Something went wrong. Please try again.');
       }
     }
   };
 
   return (
-    <Container maxWidth="sm" className="login-container">
-      <Paper elevation={3} className="login-paper">
-        <Typography variant="h4" className="login-title">
-          LOGIN
-        </Typography>
-        {errorMessage && <Alert severity="error" className="login-error">{errorMessage}</Alert>}
-        {successMessage && <Alert severity="success" className="login-success">{successMessage}</Alert>}
+    <Container className="login-container" maxWidth="sm">
+      <Paper className="login-paper" elevation={3}>
+        <Typography className="login-title" variant="h4">LOGIN</Typography>
+        {errorMessage && <Alert className="login-error" severity="error">{errorMessage}</Alert>}
+        {successMessage && <Alert className="login-success" severity="success">{successMessage}</Alert>}
         <form onSubmit={handleSubmit}>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             <TextField
+              className="login-input"  // Apply your custom CSS class
               label="Email"
               variant="outlined"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
               fullWidth
-              className="login-input"
             />
             <TextField
+              className="login-input"  // Apply your custom CSS class
               label="Password"
               variant="outlined"
               type="password"
@@ -56,9 +61,13 @@ function Login() {
               onChange={(e) => setPassword(e.target.value)}
               required
               fullWidth
-              className="login-input"
             />
-            <Button className="login-button" type="submit" fullWidth>
+            <Button 
+              className="login-button"  // Apply your custom CSS class
+              type="submit" 
+              fullWidth 
+              variant="contained"
+            >
               Login
             </Button>
           </Box>

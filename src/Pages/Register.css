@@ -40,14 +40,24 @@
 .register-error {
     margin-bottom: 1rem;
     font-family: 'Orbitron', sans-serif !important; 
-    font-size: 1.2rem; 
-    font-weight: bold; 
+    font-size: 15px; 
     background-color: #711c91 !important;
     color: white !important;
 }
 
 .register-error .MuiAlert-icon {
-    color: white !important; /* Custom color for the icon */
+    color: white !important; 
 }
 
+.register-success {
+    margin-bottom: 1rem;
+    font-family: 'Orbitron', sans-serif !important; 
+    font-size: 15px; 
+    background-color: #0abdc6 !important; /* blue background for success */
+    color: white !important;
+}
+
+.register-success .MuiAlert-icon {
+    color: white !important; 
+}
 

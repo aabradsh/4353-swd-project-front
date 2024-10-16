@@ -12,31 +12,47 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+  
+    // Check if passwords match
     if (password !== confirmPassword) {
       setErrorMessage('Passwords do not match');
       setSuccessMessage('');
       return;
     }
-    
-    setErrorMessage('');
-
+  
+    setErrorMessage('');  // Clear any previous error message
+  
     try {
-      // make API call to register
+      // Make API call to register
       const response = await axios.post('http://localhost:4000/api/register', { email, password });
-      setSuccessMessage(response.data.message); // Set success message
-      setErrorMessage(''); // Clear error message
+      setSuccessMessage(response.data.message); 
+      setErrorMessage('');  
+  
     } catch (error) {
-      if (error.response && error.response.status === 409) {
-        // if user already exists, show the error message
-        setErrorMessage(error.response.data.error);
-      } else {
-        // handle other potential errors
-        setErrorMessage('Something went wrong. Please try again.');
+      if (error.response) {
+        if (error.response.data.errors) {
+          // Display all errors as a joined string
+          setErrorMessage(error.response.data.errors.join('\n'));
+        } 
+        
+        else if (error.response.data.error) {
+          setErrorMessage(error.response.data.error);
+        } 
+        
+        else {
+          setErrorMessage('Something went wrong. Please try again.');
+        }
+      } 
+      
+      else {
+        setErrorMessage('Network error. Please check your connection.');
       }
-      setSuccessMessage(''); // clear success message
+  
+      setSuccessMessage('');
     }
   };
+  
+  
 
   return (
     <Container maxWidth="sm" className="register-container">
