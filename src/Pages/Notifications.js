@@ -30,6 +30,7 @@ function Notifications() {
     fetchNotifications();
   }, []);
 
+
   if (loading) {
     return <Typography variant="body1">Loading notifications...</Typography>;
   }
@@ -37,6 +38,7 @@ function Notifications() {
   if (error) {
     return <Typography variant="body1" color="error">{error}</Typography>;
   }
+
 
   return (
     <Container maxWidth="md" className="notifications-container">
