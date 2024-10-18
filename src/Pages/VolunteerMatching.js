@@ -15,7 +15,7 @@ function VolunteerMatching() {
   const [selectedVolunteerName, setSelectedVolunteerName] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:4000/api/volunteers') 
+    axios.get('http://localhost:4000/api/volunteer-matching/volunteers') 
       .then(response => {
         console.log('Fetched volunteers:', response.data);
         setVolunteers(response.data);
