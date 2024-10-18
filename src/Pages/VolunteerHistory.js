@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, List, ListItem, Paper, Typography } from '@mui/material';
 import axios from 'axios';
-import { Container, List, ListItem, Paper, Typography } from '@mui/material';
-import axios from 'axios';
 import './VolunteerHistory.css';  // CSS for styling
 
 function VolunteerHistory() {
@@ -11,25 +9,11 @@ function VolunteerHistory() {
   // Simulating notification fetch (replace this with actual API call if needed)
   useEffect(() => {
     axios.get('http://localhost:4000/api/volunteerHistory/events', {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`  // Assuming JWT authentication
-      }
+      params: { volunteerId: 1 }
     })
       .then(response => {
-        
-        let eventData = response.data.sort((a, b) => {
-          const date_a = a.date;
-          const date_b = b.date;
-          if (date_a < date_b) {
-            return 1;
-          }
-          else if (date_a > date_b) {
-            return -1;
-          }
-          return 0;
-        });
-        console.log(eventData);
-        setHistory(eventData);
+        console.log(response.data);
+        setHistory(response.data);
       })
 
   }, []);
@@ -51,28 +35,18 @@ function VolunteerHistory() {
                   <caption>
                     <strong> {event.name} </strong>
                   </caption>
-          <List>
-            {history.map(event => (
-              <ListItem>
-                <table>
-                  <caption>
-                    <strong> {event.name} </strong>
-                  </caption>
 
                   <tbody>
                     <tr>
-                      <th scope="row"> Event Details: </th>
-                      <td> {event.details} </td>
+                      <th scope="row"> Event Name: </th>
+                      <td> {event.name} </td>
                     </tr>
 
                     <tr>
-                      <th scope="row"> Location: </th>
-                      <td> {event.location} </td>
+                      <th scope="row"> Event Description: </th>
+                      <td> {event.description} </td>
                     </tr>
-                    <tr>
-                      <th scope="row"> Location: </th>
-                      <td> {event.location} </td>
-                    </tr>
+
                     <tr>
                       <th scope="row"> Location: </th>
                       <td> {event.location} </td>
@@ -82,15 +56,7 @@ function VolunteerHistory() {
                       <th scope="row"> Required Skills: </th>
                       <td> {event.requiredSkills} </td>
                     </tr>
-                    <tr>
-                      <th scope="row"> Required Skills: </th>
-                      <td> {event.requiredSkills} </td>
-                    </tr>
 
-                    <tr>
-                      <th scope="row"> Urgency: </th>
-                      <td> {event.urgency} </td>
-                    </tr>
                     <tr>
                       <th scope="row"> Urgency: </th>
                       <td> {event.urgency} </td>
@@ -98,18 +64,8 @@ function VolunteerHistory() {
 
                     <tr>
                       <th scope="row"> Event Date: </th>
-                      <td> {new Date(event.date).toDateString()} </td>
+                      <td> "Input Event Date" </td>
                     </tr>
-
-                    <tr>
-                      <th scope="row"> Volunteer Status: </th>
-                      <td> "Input Volunteer Participation Status" </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </ListItem>
-            ))}
-          </List>
 
                     <tr>
                       <th scope="row"> Volunteer Status: </th>
