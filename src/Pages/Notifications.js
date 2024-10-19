@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Paper, Typography, List, ListItem, ListItemText, Divider, Badge } from '@mui/material';
 import axios from 'axios';  // For making API requests
 import './Notifications.css';  // CSS for styling
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 function Notifications() {
   const [notifications, setNotifications] = useState([]);
@@ -52,8 +53,11 @@ function Notifications() {
         ) : (
           <List>
             {notifications.map(notification => (
-              <React.Fragment key={notification._id}>  {/* Use _id from MongoDB */}
-                <ListItem alignItems="flex-start">
+              <React.Fragment key={notification._id}>
+                <ListItem 
+                  alignItems="flex-start"
+                  className={notification.isRead ? 'notification-read' : 'notification-unread'}
+                >
                   <Badge
                     color={
                       notification.type === 'event'
@@ -65,10 +69,18 @@ function Notifications() {
                     badgeContent={notification.type === 'event' ? 'Event' : notification.type === 'update' ? 'Update' : 'Reminder'}
                   />
                   <ListItemText
-                    primary={notification.message}
+                    primary={
+                      <>
+                        {notification.message}
+                        {notification.isRead && (
+                          <CheckCircleIcon
+                            style={{ color: 'green', marginLeft: '10px', verticalAlign: 'middle' }}
+                          />
+                        )}
+                      </>
+                    }
                     secondary={`Date: ${new Date(notification.createdAt).toLocaleDateString()}`}
                   />
-
                 </ListItem>
                 <Divider />
               </React.Fragment>
