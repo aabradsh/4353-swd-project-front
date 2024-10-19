@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Paper, Typography} from '@mui/material';
+import { Container, List, ListItem, Paper, Typography } from '@mui/material';
+import axios from 'axios';
 import './VolunteerHistory.css';  // CSS for styling
 
 function VolunteerHistory() {
@@ -7,12 +8,28 @@ function VolunteerHistory() {
 
   // Simulating notification fetch (replace this with actual API call if needed)
   useEffect(() => {
-    const dummyHistory = [
-      { type: 'History', message: 'No History at the Moment', date: '2024-09-20' }
-    ];
+    axios.get('http://localhost:4000/api/volunteerHistory/events', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`  // Assuming JWT authentication
+      }
+    })
+      .then(response => {
+        
+        let eventData = response.data.sort((a, b) => {
+          const date_a = a.date;
+          const date_b = b.date;
+          if (date_a < date_b) {
+            return 1;
+          }
+          else if (date_a > date_b) {
+            return -1;
+          }
+          return 0;
+        });
+        console.log(eventData);
+        setHistory(eventData);
+      })
 
-    // You can fetch these from an API in a real-world app
-    setHistory(dummyHistory);
   }, []);
 
   return (
@@ -25,48 +42,50 @@ function VolunteerHistory() {
         {history.length === 0 ? (
           <Typography variant="body1">No history at the moment.</Typography>
         ) : (
-          <table>
-            <caption>
-                <strong> Event 1 </strong>
-            </caption>
+          <List>
+            {history.map(event => (
+              <ListItem>
+                <table>
+                  <caption>
+                    <strong> {event.name} </strong>
+                  </caption>
 
-            <tbody>
-                <tr>
-                    <th scope="row"> Event Name: </th>
-                    <td> "Input Event Name" </td>
-                </tr>
+                  <tbody>
+                    <tr>
+                      <th scope="row"> Event Details: </th>
+                      <td> {event.details} </td>
+                    </tr>
 
-                <tr>
-                    <th scope="row"> Event Description: </th>
-                    <td> "Input Event Description" </td>
-                </tr>
+                    <tr>
+                      <th scope="row"> Location: </th>
+                      <td> {event.location} </td>
+                    </tr>
 
-                <tr>
-                    <th scope="row"> Location: </th>
-                    <td> "Input Location" </td>
-                </tr>
+                    <tr>
+                      <th scope="row"> Required Skills: </th>
+                      <td> {event.requiredSkills} </td>
+                    </tr>
 
-                <tr>
-                    <th scope="row"> Required Skills: </th>
-                    <td> "Input Required Skills" </td>
-                </tr>
+                    <tr>
+                      <th scope="row"> Urgency: </th>
+                      <td> {event.urgency} </td>
+                    </tr>
 
-                <tr>
-                    <th scope="row"> Urgency: </th>
-                    <td> "Input Urgency" </td>
-                </tr>
+                    <tr>
+                      <th scope="row"> Event Date: </th>
+                      <td> {new Date(event.date).toDateString()} </td>
+                    </tr>
 
-                <tr>
-                    <th scope="row"> Event Date: </th>
-                    <td> "Input Event Date" </td>
-                </tr>
+                    <tr>
+                      <th scope="row"> Volunteer Status: </th>
+                      <td> "Input Volunteer Participation Status" </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </ListItem>
+            ))}
+          </List>
 
-                <tr>
-                    <th scope="row"> Volunteer Status: </th>
-                    <td> "Input Volunteer Participation Status" </td>
-                </tr>
-            </tbody>
-          </table>
         )}
       </Paper>
     </Container>
