@@ -53,3 +53,13 @@
 .additional-info-submit-button:hover {
     background-color: #d800b2; /* slightly darker shade on hover */
 }
+
+.success-message {
+    margin: 10px;
+    padding: 10px;
+    font-family: 'Orbitron', sans-serif !important; 
+    font-size: 15px; 
+    background-color: #0abdc6 !important; /* blue background for success */
+    color: white !important;
+    text-align: center;
+}
