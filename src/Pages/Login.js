@@ -24,7 +24,7 @@ function Login() {
       console.log('User logged in:', response.data.user); 
 
       // redirect after login
-      navigate('/additional-info');
+      navigate('/AdditionalInfo');
 
     } catch (error) {
       if (error.response && error.response.status === 401) {
