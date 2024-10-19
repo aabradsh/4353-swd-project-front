@@ -26,19 +26,6 @@ import { AddCircle, RemoveCircle } from '@mui/icons-material';
 const skillsList = ['Python', 'C++', 'C#', 'C', 'JavaScript', 'HTML', 'IT', 'Computer Repair'];
 const urgencies = ['Low', 'Medium', 'High'];
 
-useEffect(() => {
-  axios.get('http://localhost:4000/api/eventmanagement')
-    .then(response => {
-      console.log('Fetched volunteers:', response.data);
-      setVolunteers(response.data);
-      setErrorMessage('');  
-    })
-    .catch(error => {
-      console.error('Error fetching volunteers:', error);
-      setErrorMessage('Error fetching volunteers.');
-    });
-}, []);
-
 
 function EventManagement() {
   const [formData, setFormData] = useState({
@@ -51,19 +38,6 @@ function EventManagement() {
   });
 
   const [errors, setErrors] = useState({});
-  
-  useEffect(() => {
-    axios.get('http://localhost:4000/api/eventmanagement')
-      .then(response => {
-        console.log('Fetched volunteers:', response.data);
-        setVolunteers(response.data);
-        setErrorMessage('');  
-      })
-      .catch(error => {
-        console.error('Error fetching volunteers:', error);
-        setErrorMessage('Error fetching volunteers.');
-      });
-  }, []);
 
   const [errorMessage, setErrorMessage] = useState('');
 
