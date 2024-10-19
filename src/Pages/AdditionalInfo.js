@@ -24,6 +24,9 @@ function AdditionalInfo() {
     availability: [null] // start with one date picker
   });
 
+  const [successMessage, setSuccessMessage] = useState(''); // Message for profile save status
+  const [errorMessage, setErrorMessage] = useState('');     // Message for any error during save
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
@@ -53,15 +56,67 @@ function AdditionalInfo() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+
+    const userEmail = localStorage.getItem('userEmail');
+
+    if (!userEmail) {
+      setErrorMessage('No user logged in. Please log in.');
+      return;
+    }
+
+    // Validate form fields
+    if (!formData.fullName || !formData.address1 || !formData.city || !formData.state || !formData.zip || formData.skills.length === 0) {
+      setErrorMessage('Please fill out all required fields.');
+      return;
+    }
+
+    // Prepare the payload to send
+    const payload = {
+      email: userEmail,
+      profile: formData
+    };
+
+    // Send a POST request to save profile data
+    fetch('http://localhost:4000/api/profile', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.message) {
+          setSuccessMessage(data.message);
+          setErrorMessage('');
+        } else {
+          setErrorMessage('An error occurred while saving your profile.');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        setErrorMessage('An error occurred while saving your profile.');
+      });
   };
 
   return (
     <Container maxWidth="sm" className="additional-info-container">
       <Paper elevation={3} className="additional-info-paper">
         <Typography variant="h4" className="additional-info-title">
-          ADDITIONAL INFORMATION
+          PROFILE MANAGEMENT
         </Typography>
+
+        {successMessage && (
+          <Typography variant="body1" className="success-message">
+            {successMessage}
+          </Typography>
+        )}
+        {errorMessage && (
+          <Typography variant="body1" color="error">
+            {errorMessage}
+          </Typography>
+        )}
+
         <form onSubmit={handleSubmit}>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             <TextField
@@ -197,7 +252,7 @@ function AdditionalInfo() {
               fullWidth
               className="additional-info-submit-button"
             >
-              Submit
+              SAVE
             </Button>
           </Box>
         </form>
