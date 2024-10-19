@@ -35,7 +35,7 @@ function VolunteerMatching() {
     setSelectedVolunteerName(selectedVolunteerObj?.name || '');
   
     // Fetch the best-matched event for the selected volunteer
-    axios.get(`http://localhost:4000/api/match`, {
+    axios.get(`http://localhost:4000/api/volunteer-matching/match`, {
       params: { volunteerId: selectedId }
     })
     .then(response => {

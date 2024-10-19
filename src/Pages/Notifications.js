@@ -23,7 +23,7 @@ function Notifications() {
         setLoading(false);  // Set loading to false after data is fetched
       } catch (error) {
         console.error("Error fetching notifications", error);
-        setError("Failed to load notifications.");  // Handle error
+        setError("Failed to load notifications. Must be logged in to user.");  // Handle error
         setLoading(false);  // Set loading to false even if there's an error
       }
     };
