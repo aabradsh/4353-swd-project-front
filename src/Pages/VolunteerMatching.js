@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, TextField, Button, Box, Typography, Paper, Alert, MenuItem } from '@mui/material';
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import axios from 'axios';
 import './VolunteerMatching.css'; 
 
@@ -9,6 +10,9 @@ function VolunteerMatching() {
   const [selectedVolunteer, setSelectedVolunteer] = useState('');
   const [matchedEvent, setMatchedEvent] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [open, setOpen] = useState(false);
+  const [matchedEventName, setMatchedEventName] = useState('');
+  const [selectedVolunteerName, setSelectedVolunteerName] = useState('');
 
   useEffect(() => {
     axios.get('http://localhost:4000/api/volunteers') 
@@ -27,14 +31,18 @@ function VolunteerMatching() {
     const selectedId = e.target.value;
     setSelectedVolunteer(selectedId);
   
+    const selectedVolunteerObj = volunteers.find(v => v.id === parseInt(selectedId));
+    setSelectedVolunteerName(selectedVolunteerObj?.name || '');
+  
     // Fetch the best-matched event for the selected volunteer
-    axios.get(`http://localhost:4000/api/volunteer-matching/match`, {
+    axios.get(`http://localhost:4000/api/match`, {
       params: { volunteerId: selectedId }
     })
     .then(response => {
-      const matchingEvent = response.data[0]; // Backend returns the best-matched event
+      const matchingEvent = response.data[0];
       if (matchingEvent) {
-        setMatchedEvent(matchingEvent.name); // Display the event name
+        setMatchedEvent(matchingEvent.name); // Store the matched event
+        setMatchedEventName(matchingEvent.name);
         setErrorMessage('');
       } else {
         setMatchedEvent('');
@@ -46,6 +54,7 @@ function VolunteerMatching() {
       setErrorMessage('Error fetching matched event.');
     });
   };
+  
 
 
   return (
@@ -87,12 +96,38 @@ function VolunteerMatching() {
               className="volunteer-matching-input"
             />
 
-            <Button className="volunteer-matching-button" type="submit" fullWidth>
+            <Button
+              className="volunteer-matching-button"
+              type="button"
+              fullWidth
+              onClick={() => {
+                if (selectedVolunteer && matchedEvent) {
+                  setOpen(true); // Only open the dialog when the button is clicked and conditions are met
+                } else {
+                  setErrorMessage('Please select a volunteer and ensure an event is matched.');
+                }
+              }}
+              disabled={!selectedVolunteer || !matchedEvent}
+            >
               Match Volunteer
             </Button>
           </Box>
         </form>
       </Paper>
+
+      <Dialog open={open} onClose={() => setOpen(false)}>
+        <DialogTitle>Match Found</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {selectedVolunteerName} matched to {matchedEventName}!
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpen(false)} color="primary">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 }
