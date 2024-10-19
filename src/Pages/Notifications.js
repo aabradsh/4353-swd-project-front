@@ -37,7 +37,9 @@ function Notifications() {
   }
 
   if (error) {
-    return <Typography variant="body1" color="error">{error}</Typography>;
+    return <Typography variant="body1" color="error" style={{ textIndent: '1rem' }}>
+              {error}
+           </Typography>;
   }
 
 
