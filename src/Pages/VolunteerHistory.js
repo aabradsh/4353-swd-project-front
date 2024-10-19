@@ -11,11 +11,25 @@ function VolunteerHistory() {
   // Simulating notification fetch (replace this with actual API call if needed)
   useEffect(() => {
     axios.get('http://localhost:4000/api/volunteerHistory/events', {
-      params: { volunteerId: 1 }
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`  // Assuming JWT authentication
+      }
     })
       .then(response => {
-        console.log(response.data);
-        setHistory(response.data);
+        
+        let eventData = response.data.sort((a, b) => {
+          const date_a = a.date;
+          const date_b = b.date;
+          if (date_a < date_b) {
+            return 1;
+          }
+          else if (date_a > date_b) {
+            return -1;
+          }
+          return 0;
+        });
+        console.log(eventData);
+        setHistory(eventData);
       })
 
   }, []);
@@ -47,13 +61,8 @@ function VolunteerHistory() {
 
                   <tbody>
                     <tr>
-                      <th scope="row"> Event Name: </th>
-                      <td> {event.name} </td>
-                    </tr>
-
-                    <tr>
-                      <th scope="row"> Event Description: </th>
-                      <td> {event.description} </td>
+                      <th scope="row"> Event Details: </th>
+                      <td> {event.details} </td>
                     </tr>
 
                     <tr>
@@ -85,7 +94,7 @@ function VolunteerHistory() {
 
                     <tr>
                       <th scope="row"> Event Date: </th>
-                      <td> "Input Event Date" </td>
+                      <td> {new Date(event.date).toDateString()} </td>
                     </tr>
 
                     <tr>
