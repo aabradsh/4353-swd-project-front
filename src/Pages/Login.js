@@ -20,6 +20,7 @@ function Login() {
       const response = await axios.post('http://localhost:4000/api/login', { email, password });
       setSuccessMessage(response.data.message);
 
+      localStorage.setItem("token", response.data.token);
       console.log('User logged in:', response.data.user); 
       localStorage.setItem('userEmail', email); // store user email in local storage if login successful
 
