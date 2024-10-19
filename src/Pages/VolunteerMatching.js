@@ -15,16 +15,23 @@ function VolunteerMatching() {
   const [selectedVolunteerName, setSelectedVolunteerName] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:4000/api/volunteer-matching/volunteers') 
-      .then(response => {
-        console.log('Fetched volunteers:', response.data);
-        setVolunteers(response.data);
-        setErrorMessage('');  
-      })
-      .catch(error => {
+    const fetchVolunteers = async () => {
+      try {
+        const res = await axios.get('http://localhost:4000/api/volunteer-matching/volunteers', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+        console.log('Fetched volunteers:', res.data);
+        setVolunteers(res.data);
+        setErrorMessage('');
+      } catch (error) {
         console.error('Error fetching volunteers:', error);
-        setErrorMessage('Error fetching volunteers.');
-      });
+        setErrorMessage('Failed to load volunteers. Must be logged in.');
+      }
+    };
+  
+    fetchVolunteers();
   }, []);
 
   const handleVolunteerSelect = (e) => {
