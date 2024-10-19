@@ -21,12 +21,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/additional-info" element={<AdditionalInfo />} /> 
+          <Route path="/AdditionalInfo" element={<AdditionalInfo />} /> 
           <Route path="/register" element={<Register />} />
-          <Route path="/volunteer-matching" element={<VolunteerMatching />} />
-          <Route path="/notifications" element={<Notifications />} />
-          <Route path="/volunteer-history" element={<VolunteerHistory />} />
-          <Route path="/event-management" element={<EventManagement />} />
+          <Route path="/VolunteerMatching" element={<VolunteerMatching />} />
+          <Route path="/Notifications" element={<Notifications />} />
+          <Route path="/VolunteerHistory" element={<VolunteerHistory />} />
+          <Route path="/EventManagement" element={<EventManagement />} />
         </Routes>
       </div>
     </Router>

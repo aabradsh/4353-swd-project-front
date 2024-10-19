@@ -31,8 +31,8 @@ function Navbar() {
             open={Boolean(anchorEl)}
             onClose={handleMenuClose}
           >
-            {/* <MenuItem onClick={handleMenuClose} component={Link} to="/AdditionalInfo" className = "menu-item">ADDITIONAL INFO</MenuItem> */}
-            <MenuItem onClick={handleMenuClose} component={Link} to="/volunteerMatching" className = "menu-item">VOLUNTEER MATCHING</MenuItem>
+            <MenuItem onClick={handleMenuClose} component={Link} to="/AdditionalInfo" className = "menu-item">ADDITIONAL INFO</MenuItem>
+            <MenuItem onClick={handleMenuClose} component={Link} to="/VolunteerMatching" className = "menu-item">VOLUNTEER MATCHING</MenuItem>
             <MenuItem onClick={handleMenuClose} component={Link} to="/Notifications" className = "menu-item">NOTIFICATIONS</MenuItem>
             <MenuItem onClick={handleMenuClose} component={Link} to="/VolunteerHistory" className = "menu-item">VOLUNTEER HISTORY</MenuItem>
             <MenuItem onClick={handleMenuClose} component={Link} to="/EventManagement" className = "menu-item">EVENT MANAGEMENT</MenuItem>
