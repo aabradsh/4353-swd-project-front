@@ -6,7 +6,7 @@ import './VolunteerHistory.css';  // CSS for styling
 function VolunteerHistory() {
   const [history, setHistory] = useState([]);
 
-  // Simulating notification fetch (replace this with actual API call if needed)
+  // Connects back end to front end
   useEffect(() => {
     axios.get('http://localhost:4000/api/volunteerHistory/events', {
       headers: {
@@ -14,7 +14,7 @@ function VolunteerHistory() {
       }
     })
       .then(response => {
-        
+        //Sort the events from most recent date to oldest date
         let eventData = response.data.sort((a, b) => {
           const date_a = a.date;
           const date_b = b.date;
@@ -26,21 +26,22 @@ function VolunteerHistory() {
           }
           return 0;
         });
+        //Recieves the relevant events from the backend
         console.log(eventData);
         setHistory(eventData);
       })
 
   }, []);
-
+  //Creates a table for each event received from the back end
   return (
     <Container maxWidth="md" className="history-container">
       <Typography variant="h4" className="history-title">
         Volunteer History
       </Typography>
-
+      
       <Paper elevation={3} className="history-paper">
         {history.length === 0 ? (
-          <Typography variant="body1">No history at the moment.</Typography>
+          <Typography variant="body1">No event history yet!</Typography>
         ) : (
           <List>
             {history.map(event => (
