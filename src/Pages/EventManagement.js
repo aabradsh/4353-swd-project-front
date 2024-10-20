@@ -2,21 +2,21 @@ import './EventManagement.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
-  Container, 
-  TextField, 
-  Button, 
-  Box, 
-  Typography, 
-  Paper, 
-  MenuItem, 
-  Select, 
-  InputLabel, 
-  FormControl, 
+  Container,
+  TextField,
+  Button,
+  Box,
+  Typography,
+  Paper,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl,
   Chip,
-  Checkbox, 
-  ListItemText, 
-  OutlinedInput, 
-  TextareaAutosize, 
+  Checkbox,
+  ListItemText,
+  OutlinedInput,
+  TextareaAutosize,
   IconButton
 } from '@mui/material';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
@@ -37,22 +37,28 @@ function EventManagement() {
     eventDate: null,
   });
 
+  const [events, setEvents] = useState([]);
+  // const [events, setEvents] = useState([]);
+  const [selectedEvent, setSelectedEvent] = useState('');
+  const [matchedEvent, setMatchedEvent] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const [errors, setErrors] = useState({});
 
-  const [errorMessage, setErrorMessage] = useState('');
+  //const [errorMessage, setErrorMessage] = useState('');
 
-  const [volunteers, setVolunteers] = useState([]);
-  
+  //const [volunteers, setVolunteers] = useState([]);
+
   useEffect(() => {
     axios.get('http://localhost:4000/api/eventmanagement')
       .then(response => {
-        console.log('Fetched volunteers:', response.data);
-        setVolunteers(response.data);
-        setErrorMessage('');  
+        console.log('Fetched events:', response.data);
+        setEvents(response.data);
+        setErrorMessage('');
       })
       .catch(error => {
-        console.error('Error fetching volunteers:', error);
-        setErrorMessage('Error fetching volunteers.');
+        console.error('Error fetching events:', error);
+        setErrorMessage('Error fetching events.');
       });
   }, []);
 
@@ -90,7 +96,46 @@ function EventManagement() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      console.log('Submitting form data:', formData);
+      //console.log('Submitting form data:', formData);
+      try {
+        // Make API call to register
+        //const response = axios.post('http://localhost:4000/api/eventmanagement', { formData });
+
+
+        const response = fetch('http://localhost:4000/api/eventmanagement', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8'
+          },
+          body: JSON.stringify(formData)
+        })
+
+
+        setSuccessMessage(response.data.message);
+        setErrorMessage('');
+
+      } catch (error) {
+        if (error.response) {
+          if (error.response.data.errors) {
+            // Display all errors as a joined string
+            setErrorMessage(error.response.data.errors.join('\n'));
+          }
+
+          else if (error.response.data.error) {
+            setErrorMessage(error.response.data.error);
+          }
+
+          else {
+            setErrorMessage('Something went wrong. Please try again.');
+          }
+        }
+
+        else {
+          setErrorMessage('Network error. Please check your connection.');
+        }
+
+        setSuccessMessage('');
+      }
     }
   };
 
@@ -100,7 +145,7 @@ function EventManagement() {
         <Typography variant="h4" className="register-title">
           Event Management
         </Typography>
-        
+
         <form onSubmit={handleSubmit}>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             <TextField
@@ -190,7 +235,7 @@ function EventManagement() {
               ))}
             </Select>
           </FormControl>
-            
+
             <Button className="submit-button" type="submit" fullWidth>
               SUBMIT
             </Button>
