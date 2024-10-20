@@ -64,3 +64,11 @@
     font-size: 0.85rem;
     color: #555555;
 }
+
+.notification-read {
+    opacity: 0.6; /* Adjust as needed */
+  }
+  
+  .notification-unread {
+    opacity: 1;
+  }
