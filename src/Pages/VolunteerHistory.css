@@ -1,29 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
 
-.notifications-container {
+.history-container {
     padding: 2rem;
     margin-top: 135px; 
 }
 
-.notifications-paper {
+.history-paper {
     padding: 2rem;
     background-color: #ffffff; 
-    border-radius: 10px;
+    border-radius: 8px;
 }
 
-.notifications-title {
+.history-title {
     text-align: center;
     font-family: "Orbitron", sans-serif !important; 
     margin-bottom: 2rem;
     color: #ea00d9;
 }
 
-.notifications-item {
+.history-item {
     margin-bottom: 1rem;
     padding: 1rem;
     background-color: #f5f5f5; 
-    border-radius: 6px;
+    border-radius: 4px;
 }
 
 .MuiBadge-colorPrimary {
@@ -39,24 +39,16 @@
 }
 
 .MuiBadge-badge {
-    font-family: "Orbitron", sans-serif !important;
-    min-width: 30px;
-    height: 30px;
-    transform: translateY(0); 
-    display: flex;
-    align-items: center; /* Align vertically */
-    border-bottom: none;
-    margin-top: 10px;
+    transform: translateY(5px); 
 }
 
 .MuiDivider-root {
     margin: 1rem 0;
-    border: none;
 }
 
 .MuiListItemText-primary {
     font-weight: bold;
-    font-family: "Roboto", sans-serif !important;
+    font-family: "Roboto", sans-serif;
 }
 
 .MuiListItemText-secondary {
@@ -65,10 +57,7 @@
     color: #555555;
 }
 
-.notification-read {
-    opacity: 0.6; /* Adjust as needed */
-  }
-  
-  .notification-unread {
-    opacity: 1;
-  }
+table {
+    font-family: "Orbitron", sans-serif;
+    border: 2px solid black;
+}

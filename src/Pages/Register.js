@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Container, TextField, Button, Box, Typography, Paper, Alert } from '@mui/material';
+import axios from 'axios';
 import './Register.css'; 
 
 function Register() {
@@ -7,21 +8,51 @@ function Register() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  // const navigate = useNavigate();  // useNavigate to redirect after registration I REMOVED THIS
+  const [successMessage, setSuccessMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
+  
+    // Check if passwords match
     if (password !== confirmPassword) {
       setErrorMessage('Passwords do not match');
+      setSuccessMessage('');
       return;
     }
-    
-    setErrorMessage('');
-    
-    // after successful registration, navigate to additional info page
-    // navigate('/additional-info'); I REMOVED THIS 
+  
+    setErrorMessage('');  // Clear any previous error message
+  
+    try {
+      // Make API call to register
+      const response = await axios.post('http://localhost:4000/api/register', { email, password });
+      setSuccessMessage(response.data.message); 
+      setErrorMessage('');  
+  
+    } catch (error) {
+      if (error.response) {
+        if (error.response.data.errors) {
+          // Display all errors as a joined string
+          setErrorMessage(error.response.data.errors.join('\n'));
+        } 
+        
+        else if (error.response.data.error) {
+          setErrorMessage(error.response.data.error);
+        } 
+        
+        else {
+          setErrorMessage('Something went wrong. Please try again.');
+        }
+      } 
+      
+      else {
+        setErrorMessage('Network error. Please check your connection.');
+      }
+  
+      setSuccessMessage('');
+    }
   };
+  
+  
 
   return (
     <Container maxWidth="sm" className="register-container">
@@ -30,6 +61,7 @@ function Register() {
           REGISTER
         </Typography>
         {errorMessage && <Alert severity="error" className="register-error">{errorMessage}</Alert>}
+        {successMessage && <Alert severity="success" className="register-success">{successMessage}</Alert>}
         <form onSubmit={handleSubmit}>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             <TextField

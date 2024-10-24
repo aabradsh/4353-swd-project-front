@@ -1,21 +1,47 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Paper, Typography, List, ListItem, ListItemText, Divider, Badge } from '@mui/material';
+import axios from 'axios';  // For making API requests
 import './Notifications.css';  // CSS for styling
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 function Notifications() {
   const [notifications, setNotifications] = useState([]);
+  const [loading, setLoading] = useState(true);  // Add loading state
+  const [error, setError] = useState(null);  // Add error state
 
-  // Simulating notification fetch (replace this with actual API call if needed)
+  // Fetch notifications from the back end when the component loads
   useEffect(() => {
-    const dummyNotifications = [
-      { id: 1, type: 'event', message: 'You have been assigned to the Hackathon.', date: '2024-09-01' },
-      { id: 2, type: 'update', message: 'The Hackathon has been rescheduled.', date: '2024-09-10' },
-      { id: 3, type: 'reminder', message: 'Reminder: Hackathon is tomorrow.', date: '2024-09-20' }
-    ];
+    const fetchNotifications = async () => {
+      try {
+        // Replace 'http://localhost:4000' with your deployed backend URL if applicable
+        const res = await axios.get('http://localhost:4000/api/notifications', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`  // Assuming JWT authentication
+          }
+        });
+        setNotifications(res.data);  // Update state with fetched notifications
+        setLoading(false);  // Set loading to false after data is fetched
+      } catch (error) {
+        console.error("Error fetching notifications", error);
+        setError("Failed to load notifications. Must be logged in to user.");  // Handle error
+        setLoading(false);  // Set loading to false even if there's an error
+      }
+    };
 
-    // You can fetch these from an API in a real-world app
-    setNotifications(dummyNotifications);
+    fetchNotifications();
   }, []);
+
+
+  if (loading) {
+    return <Typography variant="body1">Loading notifications...</Typography>;
+  }
+
+  if (error) {
+    return <Typography variant="body1" color="error" style={{ textIndent: '1rem' }}>
+              {error}
+           </Typography>;
+  }
+
 
   return (
     <Container maxWidth="md" className="notifications-container">
@@ -29,8 +55,11 @@ function Notifications() {
         ) : (
           <List>
             {notifications.map(notification => (
-              <React.Fragment key={notification.id}>
-                <ListItem alignItems="flex-start">
+              <React.Fragment key={notification._id}>
+                <ListItem 
+                  alignItems="flex-start"
+                  className={notification.isRead ? 'notification-read' : 'notification-unread'}
+                >
                   <Badge
                     color={
                       notification.type === 'event'
@@ -42,8 +71,17 @@ function Notifications() {
                     badgeContent={notification.type === 'event' ? 'Event' : notification.type === 'update' ? 'Update' : 'Reminder'}
                   />
                   <ListItemText
-                    primary={notification.message}
-                    secondary={`Date: ${notification.date}`}
+                    primary={
+                      <>
+                        {notification.message}
+                        {notification.isRead && (
+                          <CheckCircleIcon
+                            style={{ color: 'green', marginLeft: '10px', verticalAlign: 'middle' }}
+                          />
+                        )}
+                      </>
+                    }
+                    secondary={`Date: ${new Date(notification.createdAt).toLocaleDateString()}`}
                   />
                 </ListItem>
                 <Divider />
