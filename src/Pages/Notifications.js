@@ -20,7 +20,7 @@ function Notifications() {
   return (
     <Container maxWidth="md" className="notifications-container">
       <Typography variant="h4" className="notifications-title">
-        Notifications
+        NOTIFICATIONS
       </Typography>
 
       <Paper elevation={3} className="notifications-paper">

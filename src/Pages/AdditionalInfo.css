@@ -14,7 +14,7 @@
 .additional-info-title {
     text-align: center;
     margin-bottom: 2rem;
-    font-family: "Orbitron", sans-serif;
+    font-family: "Orbitron", sans-serif !important;
 }
 
 .additional-info-error {

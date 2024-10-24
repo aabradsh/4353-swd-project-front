@@ -1,8 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import { Container, Box, Typography } from '@mui/material';
 import './Home.css'; 
+import axios from 'axios';
 
 function Home() {
+  const [response, SetResponse] = useState();
+
+  useEffect(() => {
+
+    const fetchData = async() => {
+      try {
+        const reponse = await axios.get('http://localhost:4000/api/hello');
+        console.log(reponse.data);
+        SetResponse(reponse.data);
+      }
+
+      catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchData();
+  });
+
   return (
     <div>
       {/* Image at the top */}

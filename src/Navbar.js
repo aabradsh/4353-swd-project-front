@@ -3,6 +3,7 @@ import { AppBar, Toolbar, Button, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 
+
 function Navbar() {
   return (
     <AppBar position="fixed" className="navbar">

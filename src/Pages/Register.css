@@ -13,8 +13,9 @@
 
 .register-title {
     text-align: center;
-    margin-bottom: 2rem;
-    font-family: "Orbitron", sans-serif;
+    margin-bottom: 50px;
+    font-family: "Orbitron", sans-serif !important;
+
 }
 
 .register-error {

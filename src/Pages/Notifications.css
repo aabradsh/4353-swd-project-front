@@ -14,7 +14,7 @@
 
 .notifications-title {
     text-align: center;
-    font-family: "Orbitron", sans-serif; 
+    font-family: "Orbitron", sans-serif !important; 
     margin-bottom: 2rem;
     color: #ea00d9;
 }

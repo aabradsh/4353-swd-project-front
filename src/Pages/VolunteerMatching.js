@@ -76,7 +76,7 @@ function VolunteerMatching() {
     <Container maxWidth="sm" className="volunteer-matching-container">
       <Paper elevation={3} className="volunteer-matching-paper">
         <Typography variant="h4" className="volunteer-matching-title">
-          Volunteer Matching
+          VOLUNTEER MATCHING
         </Typography>
 
         {errorMessage && <Alert severity="error" className="volunteer-matching-error">{errorMessage}</Alert>}
