@@ -1,58 +1,87 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Container, TextField, Button, Box, Typography, Paper, Alert } from '@mui/material';
-import axios from 'axios';
-import './Register.css'; 
+import './Register.css';
 
 function Register() {
+  const [name, setName] = useState(''); 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    // Check if passwords match
+
+    // check if passwords match
     if (password !== confirmPassword) {
       setErrorMessage('Passwords do not match');
-      setSuccessMessage('');
       return;
     }
-  
-    setErrorMessage('');  // Clear any previous error message
-  
+
+    setLoading(true); // start loading
+    setErrorMessage('');
+    setSuccessMessage('');
+
     try {
-      // Make API call to register
-      const response = await axios.post('http://localhost:4000/api/register', { email, password });
-      setSuccessMessage(response.data.message); 
-      setErrorMessage('');  
-  
-    } catch (error) {
-      if (error.response) {
-        if (error.response.data.errors) {
-          // Display all errors as a joined string
-          setErrorMessage(error.response.data.errors.join('\n'));
-        } 
-        
-        else if (error.response.data.error) {
-          setErrorMessage(error.response.data.error);
+      // make call to api for register
+      const registrationResponse = await fetch('http://localhost:4000/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      const registrationData = await registrationResponse.json();
+
+      if (registrationResponse.ok) {
+        console.log('Registration successful', registrationData);
+
+        const loginResponse = await fetch('http://localhost:4000/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+        });
+
+        const loginData = await loginResponse.json();
+
+        if (loginResponse.ok) {
+          console.log('Login successful after registration', loginData);
+
+          // store token and user info
+          localStorage.setItem('token', loginData.token);
+          localStorage.setItem('userName', loginData.userName);
+          localStorage.setItem('userId', loginData.userId); 
+
+          navigate('/profile');
         } 
         
         else {
-          setErrorMessage('Something went wrong. Please try again.');
+          setErrorMessage('Login failed after registration. Please try logging in manually.');
         }
       } 
       
       else {
-        setErrorMessage('Network error. Please check your connection.');
+        setErrorMessage(registrationData.message || 'Registration failed. Please try again.');
       }
-  
-      setSuccessMessage('');
+    } 
+    
+    catch (error) {
+      console.error('Error during registration:', error);
+      setErrorMessage('An error occurred. Please try again.');
+    } 
+    
+    finally {
+      setLoading(false); // stop loading
     }
   };
-  
-  
 
   return (
     <Container maxWidth="sm" className="register-container">
@@ -64,6 +93,15 @@ function Register() {
         {successMessage && <Alert severity="success" className="register-success">{successMessage}</Alert>}
         <form onSubmit={handleSubmit}>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+            <TextField
+              label="Name" // new input for name
+              variant="outlined"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              fullWidth
+              className="register-input"
+            />
             <TextField
               label="Email"
               variant="outlined"
@@ -93,10 +131,22 @@ function Register() {
               fullWidth
               className="register-input"
             />
-            <Button className="register-button" type="submit" fullWidth>
-              Register
+            <Button  
+              type="submit"
+              className="register-button"
+              fullWidth
+              disabled={loading}
+              >
+                {loading ? 'Registering...' : 'Register'}
             </Button>
           </Box>
+
+          <p>
+            Already have an account?
+          </p>
+          <p>
+            Login <Link to="/login">here</Link>!
+          </p>
         </form>
       </Paper>
     </Container>
