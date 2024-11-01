@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Container, TextField, Button, Box, Typography, Paper, MenuItem, Select, InputLabel, FormControl, Chip,
   Checkbox, ListItemText, OutlinedInput, TextareaAutosize, IconButton
@@ -6,6 +6,7 @@ import {
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { AddCircle, RemoveCircle } from '@mui/icons-material';
+import { Cancel as CancelIcon } from '@mui/icons-material';
 import './AdditionalInfo.css'; 
 
 const skillsList = [
@@ -57,7 +58,7 @@ const statesList = [
 
 
 
-function AdditionalInfo() {
+const AdditionalInfo = () => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -73,6 +74,8 @@ function AdditionalInfo() {
 
   const [successMessage, setSuccessMessage] = useState(''); // Message for profile save status
   const [errorMessage, setErrorMessage] = useState('');     // Message for any error during save
+  // const [confirmation, setConfirmation] = useState(false);
+  const id = localStorage.getItem('userId');
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -101,7 +104,41 @@ function AdditionalInfo() {
     setFormData((prevData) => ({ ...prevData, availability: newAvailability }));
   };
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    const fetchProfile = async () => {
+      if (id) {
+        try {
+          const profileResponse = await fetch(`http://localhost:4000/profile/${id}`);
+          const profileData = await profileResponse.json();
+
+          if (profileResponse.ok) {
+            const parsedProfile = {
+              ...profileData,
+              availability: profileData.availability.map(dateString => new Date(dateString))
+            };
+
+            setFormData(parsedProfile);
+          }
+
+          else {
+            setErrorMessage('Failed to load.');
+          }
+        }
+
+        catch (error) {
+          setErrorMessage('Error fetching.');
+        }
+      }
+
+      else {
+        setErrorMessage('User ID invalid.');
+      }
+    };
+
+    fetchProfile();
+  }, [id]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const userEmail = localStorage.getItem('userEmail');
