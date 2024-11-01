@@ -8,12 +8,59 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { AddCircle, RemoveCircle } from '@mui/icons-material';
 import './AdditionalInfo.css'; 
 
-const skillsList = ['Coding', 'Design', 'Marketing', 'Writing', 'Management'];
-const statesList = ['AL', 'AK', 'AZ', 'CA', 'NY', 'TX']; 
+const skillsList = [
+  "Python",
+  "JavaScript",
+  "Java",
+  "C++",
+  "SQL",
+  "C",
+  "HTML",
+  "CSS",
+  "React",
+  "Angular",
+  "Excel",
+  "Tableau",
+  "R Studio",
+  "Programming",
+  "Web development",
+  "Data analysis",
+  "Cybersecurity",
+  "Networking and IT",
+  "Machine Learning",
+  "MySQL",
+  "MongoDB",
+  "Database management",
+  "Figma",
+  "Adobe XD",
+  "UI/UX",
+  "Project management",
+  "Event coordination",
+  "Software testing",
+  "Cloud computing",
+  "AWS",
+  "Azure",
+  "Google Cloud",
+  "Mobile app development",
+  "iOS",
+  "Android",
+  "Flutter",
+  "Technical support"
+];
+const statesList = [
+  "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
+  "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
+  "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
+  "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
+  "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"
+];
+
+
 
 function AdditionalInfo() {
   const [formData, setFormData] = useState({
-    fullName: '',
+    firstName: '',
+    lastName: '',
     address1: '',
     address2: '',
     city: '',
@@ -120,8 +167,18 @@ function AdditionalInfo() {
         <form onSubmit={handleSubmit}>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             <TextField
-              label="Full Name"
-              name="fullName"
+              label="First Name"
+              name="firstName"
+              value={formData.fullName}
+              onChange={handleInputChange}
+              inputProps={{ maxLength: 50 }}
+              required
+              fullWidth
+              className="additional-info-input"
+            />
+            <TextField
+              label="Last Name"
+              name="lastName"
               value={formData.fullName}
               onChange={handleInputChange}
               inputProps={{ maxLength: 50 }}

@@ -34,21 +34,10 @@
     transition: background-color 0.3s ease;
     color: white !important;
     font-family: "Orbitron", sans-serif !important;
-    padding: 10px 20px; 
-    border: none; 
-    border-radius: 5px; 
-    cursor: pointer; 
-    width: 100%; 
-    margin-bottom: 20px;
 }
 
 .register-button:hover {
-    background-color: #d800b2 !important;
-}
-
-.register-button:disabled {
-    background-color: grey; 
-    cursor: not-allowed; 
+    background-color: #d800b2; /* slightly darker shade on hover */
 }
 
 .register-error {
@@ -78,10 +67,5 @@
 p {
     font-family: 'Roboto Mono', monospace !important;
     font-size: 15px;
-    padding-top: 0px;
-    padding-bottom: 0px;
     text-align: center;
-
 }
-
-
