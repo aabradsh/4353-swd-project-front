@@ -8,7 +8,7 @@ function VolunteerHistory() {
 
   // Connects back end to front end
   useEffect(() => {
-    axios.get('http://localhost:4000/api/volunteerHistory/events', {
+    axios.get('http://localhost:4000/api/volunteerHistory/show', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`  // Assuming JWT authentication
       }
@@ -16,8 +16,8 @@ function VolunteerHistory() {
       .then(response => {
         //Sort the events from most recent date to oldest date
         let eventData = response.data.sort((a, b) => {
-          const date_a = a.date;
-          const date_b = b.date;
+          const date_a = a.eventDate;
+          const date_b = b.eventDate;
           if (date_a < date_b) {
             return 1;
           }
@@ -74,7 +74,7 @@ function VolunteerHistory() {
 
                     <tr>
                       <th scope="row"> Event Date: </th>
-                      <td> {new Date(event.date).toDateString()} </td>
+                      <td> {new Date(event.eventDate).toDateString()} </td>
                     </tr>
 
                     <tr>
