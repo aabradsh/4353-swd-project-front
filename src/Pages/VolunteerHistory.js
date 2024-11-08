@@ -79,7 +79,7 @@ function VolunteerHistory() {
 
                     <tr>
                       <th scope="row"> Volunteer Status: </th>
-                      <td> "Input Volunteer Participation Status" </td>
+                      <td> Signed up </td>
                     </tr>
                   </tbody>
                 </table>
