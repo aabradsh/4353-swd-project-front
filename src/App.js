@@ -10,6 +10,7 @@ import VolunteerMatching from './Pages/VolunteerMatching';
 import Notifications from './Pages/Notifications';
 import VolunteerHistory from './Pages/VolunteerHistory';
 import EventManagement from './Pages/EventManagement';
+import Report from './Pages/Report';
 
 
 function App() {
@@ -28,6 +29,8 @@ function App() {
           <Route path="/Notifications" element={<Notifications />} />
           <Route path="/VolunteerHistory" element={<VolunteerHistory />} />
           <Route path="/EventManagement" element={<EventManagement />} />
+          <Route path="/Report" element={<Report />} />
+
         </Routes>
       </div>
     </Router>
