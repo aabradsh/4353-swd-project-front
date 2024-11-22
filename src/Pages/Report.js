@@ -11,34 +11,7 @@ const apiUrl = process.env.REACT_APP_API_BASE_URL;
 function Report() {
   const [response, SetResponse] = useState();
   const [loading, setLoading] = useState(false);
-    // async function generateReport(){
-    //     const response = await axios.get(`${apiUrl}/report/generateReport`)
-    //     .then((response) => response.data)
-    //     .then((data)=>{
-    //         console.log(data)
-    //         const reportFile = new File([data], 'reports.zip');
-    //         const url = window.URL.createObjectURL(
-    //             new Blob([data]),
-    //           );
-    //           const link = document.createElement('a');
-    //           link.href = url;
-    //           link.setAttribute(
-    //             'download',
-    //             `reports.zip`,
-    //           );
-          
-    //           // Append to html link element page
-    //           document.body.appendChild(link);
-          
-    //           // Start download
-    //           link.click();
-          
-    //           // Clean up and remove the link
-    //           link.parentNode.removeChild(link);
-              
-    //     })
-
-    // }
+    
     async function generateReport() {
         setLoading(true); // Start the loading spinner
         try {
