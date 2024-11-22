@@ -36,7 +36,8 @@ function Navbar() {
             <MenuItem onClick={handleMenuClose} component={Link} to="/VolunteerMatching" className = "menu-item">VOLUNTEER MATCHING</MenuItem>
             <MenuItem onClick={handleMenuClose} component={Link} to="/Notifications" className = "menu-item">NOTIFICATIONS</MenuItem>
             <MenuItem onClick={handleMenuClose} component={Link} to="/VolunteerHistory" className = "menu-item">VOLUNTEER HISTORY</MenuItem>
-            <MenuItem onClick={handleMenuClose} component={Link} to="/EventManagement" className = "menu-item">EVENT MANAGEMENT</MenuItem>
+            <MenuItem onClick={handleMenuClose} component={Link} to="/EventManagement" className = "menu-item">EVENT MANAGEMENT</MenuItem>           
+            <MenuItem onClick={handleMenuClose} component={Link} to="/Reports" className = "menu-item">REPORTS</MenuItem>
           </Menu>
         </Container>
       </Toolbar>
