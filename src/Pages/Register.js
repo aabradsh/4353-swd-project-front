@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Container, TextField, Button, Box, Typography, Paper, Alert } from '@mui/material';
+import { Container, TextField, Button, Box, Checkbox, Typography, Paper, Alert } from '@mui/material';
 // import axios from 'axios';
 import './Register.css';
 
@@ -12,9 +12,11 @@ const Register = ({ handleLoginState }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [admin, setAdmin] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,7 +37,8 @@ const Register = ({ handleLoginState }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ firstName, lastName, email, password }),
+        body: JSON.stringify({ firstName, lastName, email, password, admin }),
+        
       });
 
       const registerData = await registerResponse.json();
@@ -145,6 +148,16 @@ const Register = ({ handleLoginState }) => {
               fullWidth
               className="register-input"
             />
+            <label>
+              I'm an admin
+              <Checkbox
+                id="admin"
+                type="checkbox"
+                value={admin}
+                onChange= {() => setAdmin(!admin)}
+                className="register-checkbox"
+              />
+            </label>
             <Button 
               className="register-button" 
               type="submit" 
