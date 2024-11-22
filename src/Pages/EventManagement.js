@@ -143,7 +143,7 @@ function EventManagement() {
     <Container maxWidth="sm" className="register-container">
       <Paper elevation={3} className="register-paper">
         <Typography variant="h4" className="register-title">
-          Event Management
+          EVENT MANAGEMENT
         </Typography>
 
         <form onSubmit={handleSubmit}>

@@ -16,8 +16,6 @@
     margin-bottom: 30px !important;
     font-family: "Orbitron", sans-serif !important;
     margin-bottom: 50px;
-    font-family: "Orbitron", sans-serif !important;
-
 }
 
 .register-error {
@@ -65,6 +63,12 @@
 }
 
 p {
+    font-family: 'Roboto Mono', monospace !important;
+    font-size: 15px;
+    text-align: center;
+}
+
+label {
     font-family: 'Roboto Mono', monospace !important;
     font-size: 15px;
     text-align: center;

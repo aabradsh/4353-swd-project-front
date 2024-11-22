@@ -57,11 +57,22 @@
 }
 
 .success-message {
-    margin: 10px;
-    padding: 10px;
+    margin: 20px !important;
+    margin-bottom: 30px !important;
+    padding: 10px !important;
     font-family: 'Orbitron', sans-serif !important; 
     font-size: 15px; 
     background-color: #0abdc6 !important; /* blue background for success */
     color: white !important;
+    text-align: center !important;
+}
+
+.availability-header {
     text-align: center;
+    font-family: "Orbitron", sans-serif !important;
+}
+
+.additional-info-add-button {
+    font-family: "Orbitron", sans-serif !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }

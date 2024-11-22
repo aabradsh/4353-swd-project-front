@@ -29,12 +29,40 @@
 }
 
 .volunteer-matching-button {
-    background-color: #ea00d9; 
-    transition: background-color 0.3s ease;
-    color: white;
-    font-family: "Orbitron", sans-serif; 
+    background-color: #ea00d9 !important; 
+    color: white !important;
+    font-family: "Orbitron", sans-serif !important; 
+    text-align: center !important;
 }
 
 .volunteer-matching-button:hover {
-    background-color: #d800b2; 
+    background-color: #d800b2 !important; 
+    transition: background-color 0.3s ease !important;
+
 } 
+
+.dialog-title {
+    font-family: "Orbitron", sans-serif !important; 
+    text-align: center !important;
+    font-size: 25px !important;
+}
+
+.close {
+    background-color: #ea00d9 !important; 
+    color: white !important;
+    font-family: "Orbitron", sans-serif !important; 
+    text-align: center !important;
+    display: flex;
+    justify-content: center !important;
+}
+
+.close:hover {
+    background-color: #d800b2 !important; 
+    transition: background-color 0.3s ease !important;
+}
+
+.dialog-content {
+    font-family: "Orbitron", sans-serif !important; 
+    font-size: 20px !important;
+    text-align: center !important;
+}

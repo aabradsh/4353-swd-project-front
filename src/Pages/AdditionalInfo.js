@@ -6,7 +6,6 @@ import {
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { AddCircle, RemoveCircle } from '@mui/icons-material';
-import { Cancel as CancelIcon } from '@mui/icons-material';
 import './AdditionalInfo.css'; 
 
 const skillsList = [
@@ -48,6 +47,7 @@ const skillsList = [
   "Flutter",
   "Technical support"
 ];
+
 const statesList = [
   "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
   "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
@@ -69,11 +69,11 @@ const AdditionalInfo = () => {
     zip: '',
     skills: [],
     preferences: '',
-    availability: [null] // start with one date picker
+    availability: [] // start with one date picker
   });
 
-  const [successMessage, setSuccessMessage] = useState(''); // Message for profile save status
-  const [errorMessage, setErrorMessage] = useState('');     // Message for any error during save
+  const [successMessage, setSuccessMessage] = useState(''); 
+  const [errorMessage, setErrorMessage] = useState('');     
   // const [confirmation, setConfirmation] = useState(false);
   const id = localStorage.getItem('userId');
 
@@ -103,6 +103,7 @@ const AdditionalInfo = () => {
     const newAvailability = formData.availability.filter((_, i) => i !== index);
     setFormData((prevData) => ({ ...prevData, availability: newAvailability }));
   };
+
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -137,6 +138,10 @@ const AdditionalInfo = () => {
 
     fetchProfile();
   }, [id]);
+
+
+
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -182,6 +187,7 @@ const AdditionalInfo = () => {
       });
   };
 
+
   return (
     <Container maxWidth="sm" className="additional-info-container">
       <Paper elevation={3} className="additional-info-paper">
@@ -205,7 +211,7 @@ const AdditionalInfo = () => {
             <TextField
               label="First Name"
               name="firstName"
-              value={formData.fullName}
+              value={formData.firstName}
               onChange={handleInputChange}
               inputProps={{ maxLength: 50 }}
               required
@@ -215,7 +221,7 @@ const AdditionalInfo = () => {
             <TextField
               label="Last Name"
               name="lastName"
-              value={formData.fullName}
+              value={formData.lastName}
               onChange={handleInputChange}
               inputProps={{ maxLength: 50 }}
               required
@@ -312,7 +318,7 @@ const AdditionalInfo = () => {
               onChange={handleInputChange}
             />
             
-            <Typography variant="h6" gutterBottom>Availability</Typography>
+            <Typography variant="h6" gutterBottom className="availability-header">PLEASE PROVIDE YOUR AVAILABILITY:</Typography>
 
             {formData.availability.map((date, index) => (
               <Box key={index} className="additional-info-date-picker">
@@ -336,7 +342,7 @@ const AdditionalInfo = () => {
               startIcon={<AddCircle />}
               className="additional-info-add-button"
             >
-              Add Another Date
+              ADD ANOTHER DATE
             </Button>
 
             <Button

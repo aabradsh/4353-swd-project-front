@@ -28,12 +28,23 @@
 }
 
 .event-button {
-    background-color: #ea00d9;
-    transition: background-color 0.3s ease;
-    color: white;
-    font-family: "Orbitron", sans-serif;
+    background-color: #ea00d9 !important;
+    color: white !important;
+    font-family: "Orbitron", sans-serif !important;
 }
 
 .event-button:hover {
-    background-color: #d800b2; /* slightly darker shade on hover */
+    background-color: #d800b2 !important; /* slightly darker shade on hover */
+    transition: background-color 0.3s ease;
+}
+
+.submit-button {
+    background-color: #ea00d9 !important;
+    color: white !important;
+    font-family: "Orbitron", sans-serif !important;
+}
+
+.submit-button:hover {
+    background-color: #d800b2 !important; /* slightly darker shade on hover */
+    transition: background-color 0.3s ease;
 }

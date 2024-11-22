@@ -3,6 +3,7 @@ import { Container, Paper, Typography, List, ListItem, ListItemText, Divider, Ba
 import axios from 'axios';  // For making API requests
 import './Notifications.css';  // CSS for styling
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { NotificationAdd } from '@mui/icons-material';
 
 function Notifications() {
   const [notifications, setNotifications] = useState([]);
@@ -45,11 +46,11 @@ function Notifications() {
 
   return (
     <Container maxWidth="md" className="notifications-container">
-      <Typography variant="h4" className="notifications-title">
-        NOTIFICATIONS
-      </Typography>
 
       <Paper elevation={3} className="notifications-paper">
+        <Typography variant="h4" className="notifications-title">
+          NOTIFICATIONS
+        </Typography>
         {notifications.length === 0 ? (
           <Typography variant="body1">No notifications at the moment.</Typography>
         ) : (
@@ -61,6 +62,7 @@ function Notifications() {
                   className={notification.isRead ? 'notification-read' : 'notification-unread'}
                 >
                   <Badge
+                    className={notification.type === 'regular' ? 'badge-reminder' : ''}
                     color={
                       notification.type === 'event'
                         ? 'primary'
