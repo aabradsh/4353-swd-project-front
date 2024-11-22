@@ -122,16 +122,25 @@ function VolunteerMatching() {
         </form>
       </Paper>
 
-      <Dialog open={open} onClose={() => setOpen(false)}>
-        <DialogTitle>Match Found</DialogTitle>
+      <Dialog 
+        open={open} 
+        onClose={() => setOpen(false)}
+        maxWidth="md"
+      >
+        <DialogTitle className="dialog-title">MATCH FOUND!</DialogTitle>
         <DialogContent>
-          <DialogContentText>
+          <DialogContentText className="dialog-content">
             {selectedVolunteerName} matched to {matchedEventName}!
           </DialogContentText>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpen(false)} color="primary">
-            Close
+        <DialogActions sx={{ justifyContent: 'center' }}>
+        <Button 
+          onClick={() => setOpen(false)} 
+          color="primary" 
+          className="close"
+          fullWidth
+        >
+            CLOSE
           </Button>
         </DialogActions>
       </Dialog>

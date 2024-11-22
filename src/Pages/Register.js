@@ -149,7 +149,6 @@ const Register = ({ handleLoginState }) => {
               className="register-input"
             />
             <label>
-              I'm an admin
               <Checkbox
                 id="admin"
                 type="checkbox"
@@ -157,6 +156,7 @@ const Register = ({ handleLoginState }) => {
                 onChange= {() => setAdmin(!admin)}
                 className="register-checkbox"
               />
+              I am an admin!
             </label>
             <Button 
               className="register-button" 

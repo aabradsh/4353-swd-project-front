@@ -318,7 +318,7 @@ const AdditionalInfo = () => {
               onChange={handleInputChange}
             />
             
-            <Typography variant="h6" gutterBottom>Availability</Typography>
+            <Typography variant="h6" gutterBottom className="availability-header">PLEASE PROVIDE YOUR AVAILABILITY:</Typography>
 
             {formData.availability.map((date, index) => (
               <Box key={index} className="additional-info-date-picker">
@@ -342,7 +342,7 @@ const AdditionalInfo = () => {
               startIcon={<AddCircle />}
               className="additional-info-add-button"
             >
-              Add Another Date
+              ADD ANOTHER DATE
             </Button>
 
             <Button

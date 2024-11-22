@@ -35,13 +35,14 @@ function VolunteerHistory() {
   //Creates a table for each event received from the back end
   return (
     <Container maxWidth="md" className="history-container">
-      <Typography variant="h4" className="history-title">
-        Volunteer History
-      </Typography>
       
       <Paper elevation={3} className="history-paper">
+        <Typography variant="h4" className="history-title">
+          VOLUNTEER HISTORY
+        </Typography>
+
         {history.length === 0 ? (
-          <Typography variant="body1">No event history yet!</Typography>
+          <Typography variant="body1">NO EVENT HISTORY YET!</Typography>
         ) : (
           <List>
             {history.map(event => (
@@ -53,32 +54,32 @@ function VolunteerHistory() {
 
                   <tbody>
                     <tr>
-                      <th scope="row"> Event Details: </th>
+                      <th scope="row"> EVENT DETAILS: </th>
                       <td> {event.details} </td>
                     </tr>
 
                     <tr>
-                      <th scope="row"> Location: </th>
+                      <th scope="row"> LOCATION: </th>
                       <td> {event.location} </td>
                     </tr>
 
                     <tr>
-                      <th scope="row"> Required Skills: </th>
+                      <th scope="row"> REQUIRED SKILLS: </th>
                       <td> {event.requiredSkills} </td>
                     </tr>
 
                     <tr>
-                      <th scope="row"> Urgency: </th>
+                      <th scope="row"> URGENCY: </th>
                       <td> {event.urgency} </td>
                     </tr>
 
                     <tr>
-                      <th scope="row"> Event Date: </th>
+                      <th scope="row"> EVENT DATE: </th>
                       <td> {new Date(event.eventDate).toDateString()} </td>
                     </tr>
 
                     <tr>
-                      <th scope="row"> Volunteer Status: </th>
+                      <th scope="row"> VOLUNTEER STATUS: </th>
                       <td> Signed up </td>
                     </tr>
                   </tbody>
