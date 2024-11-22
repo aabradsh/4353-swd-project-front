@@ -22,7 +22,7 @@ function Navbar() {
           <Button className="navbar-button" component={Link} to="/">Home</Button>
           <Button className="navbar-button" component={Link} to="/login">Login</Button>
           <Button className="navbar-button" component={Link} to="/Register">Register Here</Button>
-          <Button className="navbar-button" component={Link} to="/Report">Generate Report</Button>
+         
 
           
           {/* Drop-down Menu */}
@@ -39,7 +39,7 @@ function Navbar() {
             <MenuItem onClick={handleMenuClose} component={Link} to="/Notifications" className = "menu-item">NOTIFICATIONS</MenuItem>
             <MenuItem onClick={handleMenuClose} component={Link} to="/VolunteerHistory" className = "menu-item">VOLUNTEER HISTORY</MenuItem>
             <MenuItem onClick={handleMenuClose} component={Link} to="/EventManagement" className = "menu-item">EVENT MANAGEMENT</MenuItem>
-            <MenuItem onClick={handleMenuClose} component={Link} to="/Report" className = "menu-item">REPORT</MenuItem>
+            <MenuItem onClick={handleMenuClose} component={Link} to="/Report" className = "menu-item">GENERATE REPORT</MenuItem>
 
           </Menu>
         </Container>
