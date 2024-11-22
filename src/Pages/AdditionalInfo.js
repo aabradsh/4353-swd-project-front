@@ -146,33 +146,45 @@ const AdditionalInfo = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setErrorMessage('No user logged in. Please log in.');
+      return;
+    }
 
-    const saveProfile = {
-      ...formData,
-      availability: formData.availability.map(date => date.toISOString()),
-      id
+    // Validate form fields
+    if (!formData.firstName || !formData.lastName || !formData.address1 || !formData.city || !formData.state || !formData.zip || formData.skills.length === 0) {
+      setErrorMessage('Please fill out all required fields.');
+      return;
+    }
+
+    // Prepare the payload to send
+    const payload = {
+      profile: formData
     };
 
-    console.log('Saving:', saveProfile);
-
-    try {
-      const response = await fetch('http://localhost:4000/profile', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(saveProfile)
+    // Send a POST request to save profile data
+    fetch('http://localhost:4000/profile', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(payload),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.message) {
+          setSuccessMessage(data.message);
+          setErrorMessage('');
+        } else {
+          setErrorMessage('An error occurred while saving your profile.');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        setErrorMessage('An error occurred while saving your profile.');
       });
-
-      const data = await response.json();
-      if (response.ok) {
-        console.log('Profile updated successfully:', data);
-        setSuccessMessage(true);
-        localStorage.setItem('userProfile', JSON.stringify(saveProfile)); 
-      } else {
-        setErrorMessage(data.message || 'An error occurred while saving your profile.');
-      }
-    } catch (error) {
-      setErrorMessage('An error occurred while saving your profile.');
-    }
   };
 
 
