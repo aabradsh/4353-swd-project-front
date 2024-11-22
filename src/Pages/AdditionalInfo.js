@@ -6,7 +6,6 @@ import {
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { AddCircle, RemoveCircle } from '@mui/icons-material';
-import { Cancel as CancelIcon } from '@mui/icons-material';
 import './AdditionalInfo.css'; 
 
 const skillsList = [
@@ -48,6 +47,7 @@ const skillsList = [
   "Flutter",
   "Technical support"
 ];
+
 const statesList = [
   "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
   "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
@@ -69,11 +69,11 @@ const AdditionalInfo = () => {
     zip: '',
     skills: [],
     preferences: '',
-    availability: [null] // start with one date picker
+    availability: [] // start with one date picker
   });
 
-  const [successMessage, setSuccessMessage] = useState(''); // Message for profile save status
-  const [errorMessage, setErrorMessage] = useState('');     // Message for any error during save
+  const [successMessage, setSuccessMessage] = useState(''); 
+  const [errorMessage, setErrorMessage] = useState('');     
   // const [confirmation, setConfirmation] = useState(false);
   const id = localStorage.getItem('userId');
 
@@ -103,6 +103,7 @@ const AdditionalInfo = () => {
     const newAvailability = formData.availability.filter((_, i) => i !== index);
     setFormData((prevData) => ({ ...prevData, availability: newAvailability }));
   };
+
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -138,50 +139,42 @@ const AdditionalInfo = () => {
     fetchProfile();
   }, [id]);
 
+
+
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const userEmail = localStorage.getItem('userEmail');
 
-    if (!userEmail) {
-      setErrorMessage('No user logged in. Please log in.');
-      return;
-    }
-
-    // Validate form fields
-    if (!formData.fullName || !formData.address1 || !formData.city || !formData.state || !formData.zip || formData.skills.length === 0) {
-      setErrorMessage('Please fill out all required fields.');
-      return;
-    }
-
-    // Prepare the payload to send
-    const payload = {
-      email: userEmail,
-      profile: formData
+    const saveProfile = {
+      ...formData,
+      availability: formData.availability.map(date => date.toISOString()),
+      id
     };
 
-    // Send a POST request to save profile data
-    fetch('http://localhost:4000/api/profile', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (data.message) {
-          setSuccessMessage(data.message);
-          setErrorMessage('');
-        } else {
-          setErrorMessage('An error occurred while saving your profile.');
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        setErrorMessage('An error occurred while saving your profile.');
+    console.log('Saving:', saveProfile);
+
+    try {
+      const response = await fetch('http://localhost:4000/profile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(saveProfile)
       });
+
+      const data = await response.json();
+      if (response.ok) {
+        console.log('Profile updated successfully:', data);
+        setSuccessMessage(true);
+        localStorage.setItem('userProfile', JSON.stringify(saveProfile)); 
+      } else {
+        setErrorMessage(data.message || 'An error occurred while saving your profile.');
+      }
+    } catch (error) {
+      setErrorMessage('An error occurred while saving your profile.');
+    }
   };
+
 
   return (
     <Container maxWidth="sm" className="additional-info-container">
@@ -206,7 +199,7 @@ const AdditionalInfo = () => {
             <TextField
               label="First Name"
               name="firstName"
-              value={formData.fullName}
+              value={formData.firstName}
               onChange={handleInputChange}
               inputProps={{ maxLength: 50 }}
               required
@@ -216,7 +209,7 @@ const AdditionalInfo = () => {
             <TextField
               label="Last Name"
               name="lastName"
-              value={formData.fullName}
+              value={formData.lastName}
               onChange={handleInputChange}
               inputProps={{ maxLength: 50 }}
               required
